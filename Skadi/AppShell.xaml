@@ -6,9 +6,9 @@
     xmlns:local="clr-namespace:Skadi"
     Shell.FlyoutBehavior="Disabled"
     Title="Skadi">
-
+    
     <ShellContent
-        Title="Home"
+        Title="Skadi"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
