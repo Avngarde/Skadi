@@ -1,27 +1,16 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Skadi.Views;
 
 namespace Skadi.ViewModels;
 
-public class MainPageViewModel : INotifyPropertyChanged
+public partial class MainPageViewModel : ObservableObject
 {
-    public ICommand OpenAddWorkoutFormCommand { get; }
-
-    public MainPageViewModel()
+    [RelayCommand]
+    public async Task OpenAddWorkoutForm()
     {
-        OpenAddWorkoutFormCommand = new Command(async () => await ExecuteOpenAddWorkoutFormCommand());
+        AddWorkoutForm addWorkoutForm = new();
+        await Application.Current.MainPage.Navigation.PushAsync(addWorkoutForm);
     }
-
-    private async Task ExecuteOpenAddWorkoutFormCommand()
-    {
-        await Application.Current.MainPage.DisplayAlert("Alert", "You just got alerted!", "Ugh fine");
-    }
-    
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }    
 }
