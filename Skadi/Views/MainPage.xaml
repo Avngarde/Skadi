@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Skadi.ViewModels"
+             x:Class="Skadi.Views.MainPage">
+    <ContentPage.BindingContext>
+        <viewModels:MainPageViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="OpenAddWorkoutForm" Text="+" Command="{Binding OpenAddWorkoutFormCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <Label>Welcome to Skadi</Label>
+    </ScrollView>
+
+</ContentPage>
