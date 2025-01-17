@@ -1,7 +1,10 @@
+using SQLite;
+
 namespace Skadi.Models;
 
 public class Workout
 {
+    [PrimaryKey]
     public int Id { get; set; }
     public string? WorkoutName { get; set; }
     public int Rounds { get; set; }
