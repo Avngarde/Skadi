@@ -7,9 +7,9 @@ public class WorkoutService
 {
     private SQLiteAsyncConnection con;
 
-    public WorkoutService()
+    public WorkoutService(DbConfig config)
     {
-        con = new SQLiteAsyncConnection(DbConfig.DatabasePath, DbConfig.Flags);
+        con = new SQLiteAsyncConnection(config.DatabasePath, config.Flags);
     }
     
     public async Task InitTableIfDoesNotExist()

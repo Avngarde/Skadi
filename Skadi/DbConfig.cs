@@ -1,16 +1,22 @@
+using Skadi.Interfaces;
+
 namespace Skadi;
 
 public class DbConfig
 {
-    public static string DbName = "Skadi.db3";
+    private readonly IFileSystemHelper _fileSystemHelper;
+
+    public DbConfig(IFileSystemHelper fileSystemHelper)
+    {
+        _fileSystemHelper = fileSystemHelper;
+    }
     
-    public const SQLite.SQLiteOpenFlags Flags =
-        // open the database in read/write mode
+    public string DbName => "Skadi.db3";
+    
+    public string DatabasePath => Path.Combine(_fileSystemHelper.AppDataDirectory, DbName);
+
+    public readonly SQLite.SQLiteOpenFlags Flags =
         SQLite.SQLiteOpenFlags.ReadWrite |
-        // create the database if it doesn't exist
         SQLite.SQLiteOpenFlags.Create |
-        // enable multi-threaded database access
         SQLite.SQLiteOpenFlags.SharedCache;
-    
-    public static string DatabasePath = Path.Combine(FileSystem.AppDataDirectory, DbName);
 }
