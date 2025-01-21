@@ -9,17 +9,19 @@ namespace Skadi.ViewModels;
 
 public partial class AddWorkoutFormViewModel : ObservableObject
 {
-    [ObservableProperty] 
-    private string _workoutName;
-    
-    [ObservableProperty]
-    private int _rounds;
-    
-    [ObservableProperty]
-    private Difficulty _difficulty;
+    [ObservableProperty] private string _workoutName;
 
+    [ObservableProperty] private int _rounds;
+
+    [ObservableProperty] private int _difficultyIndex;
+    
+    public List<string> Difficulties
+    {
+        get { return Enum.GetNames(typeof(Difficulty)).ToList(); }
+    }
+    
     [RelayCommand]
-    public async Task Test()
+    public async Task CreateNewWorkout()
     {
         await Application.Current.MainPage.DisplayAlert("_workoutName value", WorkoutName, "Ok");
     }
