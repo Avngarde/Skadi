@@ -15,15 +15,7 @@ public class Tests
     [Test]
     public async Task AddingNewWorkoutTest()
     {
-        // Arrange: Create a temporary directory
-        string tempDirectory = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-        Directory.CreateDirectory(tempDirectory);
-        
-        var mockFileSystemHelper = new Mock<IFileSystemHelper>();
-        mockFileSystemHelper.Setup(f => f.AppDataDirectory).Returns(tempDirectory);
-        DbConfig dbConfig = new(mockFileSystemHelper.Object);
-        
-        Skadi.Services.WorkoutService workoutService = new(dbConfig);
+        Skadi.Services.WorkoutService workoutService = new();
         await workoutService.InitTableIfDoesNotExist();
         Workout[] workouts = await workoutService.GetAllWorkouts();
         int count = workouts.Length;
