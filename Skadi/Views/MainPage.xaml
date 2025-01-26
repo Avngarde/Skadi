@@ -12,7 +12,34 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <Label>Welcome to Skadi</Label>
+        <StackLayout BindableLayout.ItemsSource="{Binding Workouts}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10" Padding="10" StrokeShape="RoundRectangle 5,5,5,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80*" />
+                                <ColumnDefinition Width="20*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*" />
+                                    <RowDefinition Height="50*" />
+                                </Grid.RowDefinitions>
+                                
+                                <Label Grid.Row="0" Text="{Binding WorkoutName}" />
+                                <Label Grid.Row="1" Text="{Binding RoundsText}" TextColor="SlateGray"/>
+                            </Grid>
+                            
+                            <Border Grid.Column="1" BackgroundColor="{Binding DifficultyColor}" Stroke="{Binding DifficultyColor}" StrokeShape="RoundRectangle 5,5,5,5">
+                                <Label Text="{Binding Difficulty}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{Binding DifficultyTextColor}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
     </ScrollView>
 
 </ContentPage>
