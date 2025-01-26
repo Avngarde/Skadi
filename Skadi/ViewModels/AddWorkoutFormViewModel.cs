@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
@@ -59,7 +60,8 @@ public partial class AddWorkoutFormViewModel : ObservableObject
            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
            var toast = Toast.Make($"{WorkoutName} successfully created!", ToastDuration.Long, 12);
            await toast.Show(cancellationTokenSource.Token);
-           await Application.Current.MainPage.Navigation.PopAsync();
+           WeakReferenceMessenger.Default.Send(new MainPageViewModel.RefreshWorkoutsMessage());
+           await Application.Current.MainPage.Navigation.PopAsync(true);
 
        }
        else

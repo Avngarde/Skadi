@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using CommunityToolkit.Mvvm.Input;
 using Skadi.Services;
 using Skadi.Models;
@@ -15,11 +16,16 @@ public partial class MainPageViewModel : ObservableObject
     {
         AddWorkoutForm addWorkoutForm = new();
         await Application.Current.MainPage.Navigation.PushAsync(addWorkoutForm);
+        await LoadWorkoutsAsync();
     }
 
     public MainPageViewModel()
     {
         LoadWorkoutsAsync();
+        WeakReferenceMessenger.Default.Register<RefreshWorkoutsMessage>(this, (r, m) =>
+        {
+            LoadWorkoutsAsync();
+        });        
     }
     
     private async Task LoadWorkoutsAsync()
@@ -70,5 +76,10 @@ public partial class MainPageViewModel : ObservableObject
         public Difficulty Difficulty { get; set; }
         public Color DifficultyColor { get; set; }
         public Color DifficultyTextColor { get; set; }
+    }
+    
+    public class RefreshWorkoutsMessage
+    {
+        // You can add properties if needed to pass data with the message
     }
 }
