@@ -22,9 +22,10 @@ public partial class MainPageViewModel : ObservableObject
     public MainPageViewModel()
     {
         LoadWorkoutsAsync();
-        WeakReferenceMessenger.Default.Register<RefreshWorkoutsMessage>(this, (r, m) =>
+        WeakReferenceMessenger.Default.Register<string>(this, (r, m) =>
         {
-            LoadWorkoutsAsync();
+            if (m == "RefreshWorkouts")
+                LoadWorkoutsAsync();
         });        
     }
     
@@ -76,10 +77,5 @@ public partial class MainPageViewModel : ObservableObject
         public Difficulty Difficulty { get; set; }
         public Color DifficultyColor { get; set; }
         public Color DifficultyTextColor { get; set; }
-    }
-    
-    public class RefreshWorkoutsMessage
-    {
-        // You can add properties if needed to pass data with the message
     }
 }
