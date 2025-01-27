@@ -9,7 +9,7 @@
     <ContentPage.BindingContext>
         <viewModels:AddWorkoutFormViewModel></viewModels:AddWorkoutFormViewModel>
     </ContentPage.BindingContext>
-    
+
     <VerticalStackLayout Padding="0" Spacing="20" Margin="20,50,20,0">
         <Entry Placeholder="Workout name" Text="{Binding WorkoutName}" />
         <Entry Placeholder="Rounds" Text="{Binding Rounds}" />

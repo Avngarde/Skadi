@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.Input;
 using Skadi.Services;
 using Skadi.Models;
 using Skadi.Views;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 
 namespace Skadi.ViewModels;
 
@@ -17,6 +19,14 @@ public partial class MainPageViewModel : ObservableObject
         AddWorkoutForm addWorkoutForm = new();
         await Application.Current.MainPage.Navigation.PushAsync(addWorkoutForm);
         await LoadWorkoutsAsync();
+    }
+
+    [RelayCommand]
+    public async Task WorkoutTap(WorkoutMainPage tappedWorkout)
+    {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        var toast = Toast.Make($"You tapped workout, name: {tappedWorkout.WorkoutName}", ToastDuration.Long, 12);
+        await toast.Show(cancellationTokenSource.Token);
     }
 
     public MainPageViewModel()
