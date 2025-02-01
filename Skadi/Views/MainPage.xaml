@@ -8,7 +8,8 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="OpenAddWorkoutForm" Text="+" Command="{Binding OpenAddWorkoutFormCommand}"></ToolbarItem>
+        <ToolbarItem x:Name="OpenAddWorkoutForm" Text="➕" Command="{Binding OpenAddWorkoutFormCommand}" />
+        <ToolbarItem x:Name="OpenTimerForm" Text="⏰" Command="{Binding OpenTimerPageCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>

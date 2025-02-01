@@ -19,9 +19,16 @@ public partial class MainPageViewModel : ObservableObject
         await LoadWorkoutsAsync();
     }
 
+    [RelayCommand]
+    public async Task OpenTimerPage()
+    {
+        TimerPage timerPage = new();
+        await Application.Current.MainPage.Navigation.PushAsync(timerPage);
+    }
+
     public MainPageViewModel()
     {
-        LoadWorkoutsAsync();
+        LoadWorkoutsAsync(); 
         WeakReferenceMessenger.Default.Register<RefreshWorkoutsMessage>(this, (r, m) =>
         {
             LoadWorkoutsAsync();
