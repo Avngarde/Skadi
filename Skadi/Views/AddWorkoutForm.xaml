@@ -3,12 +3,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Skadi.ViewModels"
+             Title="New Workout"
              x:Class="Skadi.Views.AddWorkoutForm">
 
     <ContentPage.BindingContext>
         <viewModels:AddWorkoutFormViewModel></viewModels:AddWorkoutFormViewModel>
     </ContentPage.BindingContext>
-    
+
     <VerticalStackLayout Padding="0" Spacing="20" Margin="20,50,20,0">
         <Entry Placeholder="Workout name" Text="{Binding WorkoutName}" />
         <Entry Placeholder="Rounds" Text="{Binding Rounds}" />

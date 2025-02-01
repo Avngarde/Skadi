@@ -60,7 +60,7 @@ public partial class AddWorkoutFormViewModel : ObservableObject
            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
            var toast = Toast.Make($"{WorkoutName} successfully created!", ToastDuration.Long, 12);
            await toast.Show(cancellationTokenSource.Token);
-           WeakReferenceMessenger.Default.Send(new MainPageViewModel.RefreshWorkoutsMessage());
+           WeakReferenceMessenger.Default.Send("RefreshWorkouts");
            await Application.Current.MainPage.Navigation.PopAsync(true);
 
        }

@@ -8,16 +8,18 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="OpenAddWorkoutForm" Text="➕" Command="{Binding OpenAddWorkoutFormCommand}" />
-        <ToolbarItem x:Name="OpenTimerForm" Text="⏰" Command="{Binding OpenTimerPageCommand}"/>
+        <ToolbarItem x:Name="OpenAddWorkoutForm" Text="+" Command="{Binding OpenAddWorkoutFormCommand}"></ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <StackLayout BindableLayout.ItemsSource="{Binding Workouts}">
+        <StackLayout x:Name="WorkoutsLayout" BindableLayout.ItemsSource="{Binding Workouts}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="10" Padding="10" StrokeShape="RoundRectangle 5,5,5,5">
-                        <Grid>
+                        <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=BindingContext.WorkoutTapCommand, Source={x:Reference Name=WorkoutsLayout}}" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80*" />
                                 <ColumnDefinition Width="20*" />
@@ -28,7 +30,7 @@
                                     <RowDefinition Height="50*" />
                                     <RowDefinition Height="50*" />
                                 </Grid.RowDefinitions>
-                                
+
                                 <Label Grid.Row="0" Text="{Binding WorkoutName}" />
                                 <Label Grid.Row="1" Text="{Binding RoundsText}" TextColor="SlateGray"/>
                             </Grid>

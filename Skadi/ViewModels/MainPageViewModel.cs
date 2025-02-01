@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.Input;
 using Skadi.Services;
 using Skadi.Models;
 using Skadi.Views;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 
 namespace Skadi.ViewModels;
 
@@ -20,18 +22,20 @@ public partial class MainPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public async Task OpenTimerPage()
+    public async Task WorkoutTap(WorkoutMainPage tappedWorkout)
     {
-        TimerPage timerPage = new();
-        await Application.Current.MainPage.Navigation.PushAsync(timerPage);
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        var toast = Toast.Make($"You tapped workout, name: {tappedWorkout.WorkoutName}", ToastDuration.Long, 12);
+        await toast.Show(cancellationTokenSource.Token);
     }
 
     public MainPageViewModel()
     {
-        LoadWorkoutsAsync(); 
-        WeakReferenceMessenger.Default.Register<RefreshWorkoutsMessage>(this, (r, m) =>
+        LoadWorkoutsAsync();
+        WeakReferenceMessenger.Default.Register<string>(this, (r, m) =>
         {
-            LoadWorkoutsAsync();
+            if (m == "RefreshWorkouts")
+                LoadWorkoutsAsync();
         });        
     }
     
@@ -83,10 +87,5 @@ public partial class MainPageViewModel : ObservableObject
         public Difficulty Difficulty { get; set; }
         public Color DifficultyColor { get; set; }
         public Color DifficultyTextColor { get; set; }
-    }
-    
-    public class RefreshWorkoutsMessage
-    {
-        // You can add properties if needed to pass data with the message
     }
 }
