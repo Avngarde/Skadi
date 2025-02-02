@@ -1,6 +1,7 @@
 using Moq;
 using Skadi;
 using Skadi.Models;
+using Skadi.Helpers;
 using Skadi.Interfaces;
 
 namespace SkadiTests;
@@ -44,5 +45,13 @@ public class Tests
         {
             Assert.Fail();
         }
+    }
+
+    [Test]
+    public void TimeToProgressTest()
+    {
+        int progress1 = TimeHelper.TimeToProgress(0, 30, 1, 30);
+        int progress2 = TimeHelper.TimeToProgress(2, 30, 2, 40);
+        Assert.Pass();
     }
 }
