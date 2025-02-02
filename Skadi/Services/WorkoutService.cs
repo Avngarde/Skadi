@@ -13,6 +13,12 @@ public class WorkoutService
         DbConfig config = new DbConfig(new FileSystemHelper());
         con = new SQLiteAsyncConnection(config.DatabasePath, config.Flags);
     }
+
+    // This constructor is only used for unit testing using Moq
+    public WorkoutService(DbConfig mockDbConfig)
+    {
+        con = new SQLiteAsyncConnection(mockDbConfig.DatabasePath, mockDbConfig.Flags);
+    }
     
     public async Task InitTableIfDoesNotExist()
     { 
