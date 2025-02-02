@@ -9,6 +9,7 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="OpenAddWorkoutForm" Text="+" Command="{Binding OpenAddWorkoutFormCommand}"></ToolbarItem>
+        <ToolbarItem x:Name="OpenTimerForm" Text="⏰" Command="{Binding OpenTimerCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>

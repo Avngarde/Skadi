@@ -22,6 +22,13 @@ public partial class MainPageViewModel : ObservableObject
     }
 
     [RelayCommand]
+    public async Task OpenTimer()
+    {
+        TimerPage timerPage = new();
+        await Application.Current.MainPage.Navigation.PushAsync(timerPage);
+    }
+
+    [RelayCommand]
     public async Task WorkoutTap(WorkoutMainPage tappedWorkout)
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
