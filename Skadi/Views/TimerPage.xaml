@@ -10,31 +10,36 @@
         <viewModels:TimerPageViewModel/>
     </ContentPage.BindingContext>
     
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="2*" />
-        </Grid.RowDefinitions>
-        
+    <VerticalStackLayout Margin="0, 50, 0, 0">
         <Frame Grid.Row="0" BorderColor="Transparent">
             <customs:CircularProgressBar
-                Progress="35"
-                ProgressColor="{StaticResource Primary}"
+                Progress="100"
+                ProgressColor="{StaticResource Secondary}"
                 ProgressLeftColor="{StaticResource Gray100}"
-                Size="300"
+                Size="250"
                 TextColor="Black"
-                Thickness="30" />
+                Thickness="25" />
         </Frame>
         
-        <Grid Grid.Row="1">
+        <Grid Margin="50, 30, 50, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="5*"  />
+                <ColumnDefinition Width="50*" />
+            </Grid.ColumnDefinitions>
+            <Picker ItemsSource="{Binding Minutes}" HorizontalTextAlignment="Center" FontSize="25"  />
+            <Label Text=":" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="25" />
+            <Picker Grid.Column="2" ItemsSource="{Binding Seconds}" FontSize="25" HorizontalTextAlignment="Center" />
+        </Grid>
+        
+        <Grid Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50*" />
                 <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
             
-            <Button Text="Stop" Margin="10" BackgroundColor="IndianRed" />
-            <Button Grid.Column="1" Text="Start" Margin="10" BackgroundColor="Green" />
+            <Button Text="⏹️" Margin="10" BorderColor="IndianRed" BorderWidth="1.5" BackgroundColor="White" FontSize="30" />
+            <Button Grid.Column="1" Text="▶️" Margin="10" BorderColor="Green" BorderWidth="1.5" BackgroundColor="White" FontSize="30" />
         </Grid>
-        
-    </Grid>
+    </VerticalStackLayout>
 </ContentPage>
