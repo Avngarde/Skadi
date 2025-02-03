@@ -89,13 +89,15 @@ public class CircularProgressBarDrawable : BindableObject, IDrawable
             canvas.StrokeSize = Thickness;
             canvas.DrawEllipse(x, y, effectiveSize, effectiveSize);
         }
-        
+
+        /*
         float fontSize = effectiveSize / 2.86f;
         canvas.FontSize = fontSize;
         canvas.FontColor = TextColor;
         float verticalPosition = Size - (fontSize / 2);
-        canvas.DrawString($"Skibidi!", x, verticalPosition, effectiveSize, effectiveSize / 4,
+        canvas.DrawString($"Test", x, verticalPosition, effectiveSize, effectiveSize / 4,
             HorizontalAlignment.Center, VerticalAlignment.Center);
+        */
     }
 
     private float GetAngle(int progress)
