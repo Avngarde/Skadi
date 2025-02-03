@@ -6,6 +6,8 @@ public class TimeHelper
     {
         originalSeconds += (originalMinutes * 60);
         currentSeconds += (currentMinutes * 60);
-        return (currentSeconds / originalSeconds) * 100;
+        double progressPercent = (double)currentSeconds / (double)originalSeconds;
+        int percentInteger = (int)(progressPercent * 100.0);
+        return percentInteger;
     }
 }
