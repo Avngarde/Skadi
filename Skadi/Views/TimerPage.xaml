@@ -14,7 +14,7 @@
     <VerticalStackLayout Margin="0, 50, 0, 0">
         <Frame Grid.Row="0" BorderColor="Transparent">
             <customs:CircularProgressBar
-                Progress="100"
+                Progress="{Binding Progress}"
                 ProgressColor="{StaticResource Secondary}"
                 ProgressLeftColor="{StaticResource Gray100}"
                 Size="250"
@@ -40,7 +40,7 @@
             </Grid.ColumnDefinitions>
             
             <Button Text="⏹️" Margin="10" BorderColor="IndianRed" BorderWidth="1.5" BackgroundColor="White" FontSize="30" />
-            <Button Grid.Column="1" Text="▶️" Margin="10" BorderColor="Green" BorderWidth="1.5" BackgroundColor="White" FontSize="30" />
+            <Button Grid.Column="1" Text="{Binding PlayPauseSymbol}" Margin="10" BorderColor="Green" BorderWidth="1.5" BackgroundColor="White" FontSize="30" Command="{Binding PlayPauseClickedCommand}" />
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
