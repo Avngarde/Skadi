@@ -14,12 +14,11 @@
     <VerticalStackLayout Margin="0, 50, 0, 0">
         <Frame Grid.Row="0" BorderColor="Transparent">
             <customs:CircularProgressBar
-                Progress="{Binding Progress}"
-                ProgressColor="{StaticResource Secondary}"
-                ProgressLeftColor="{StaticResource Gray100}"
-                Size="250"
-                TextColor="Black"
-                Thickness="25" />
+                Progress="{Binding TimerProgress}"
+                ProgressLeftColor="{StaticResource Gray100}" 
+                ProgressColor="{StaticResource Primary}"
+                Size="300"              
+                Thickness="50" />
         </Frame>
         
         <Grid Margin="50, 30, 50, 0">

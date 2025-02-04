@@ -8,27 +8,9 @@ namespace Skadi.Custom;
 
 public partial class CircularProgressBar : ContentView
 {
-    private readonly CircularProgressBarDrawable _drawable;
-    
     public CircularProgressBar()
     {
         InitializeComponent();
-        BindingContext = this; 
-        _drawable = new CircularProgressBarDrawable();
-        graphicsView.Drawable = _drawable;
-
-        // Manually bind properties
-        graphicsView.PropertyChanged += (s, e) => 
-        {
-            _drawable.Progress = Progress;
-            _drawable.Size = Size;
-            _drawable.TextColor = TextColor;
-            _drawable.Thickness = Thickness;
-            _drawable.ProgressColor = ProgressColor;
-            _drawable.ProgressLeftColor = ProgressLeftColor;
-
-            graphicsView.Invalidate(); // Force redraw
-        };
     }
     public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBar));
     public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(int), typeof(CircularProgressBar));
@@ -58,7 +40,7 @@ public partial class CircularProgressBar : ContentView
     public Color ProgressColor
     {
         get { return (Color)GetValue(ProgressColorProperty); }
-        set { SetValue(ProgressColorProperty, value); }
+        set { SetValue(ProgressColorProperty, value); OnPropertyChanged(ProgressColorProperty.PropertyName); }
     }
 
     public Color ProgressLeftColor
@@ -76,6 +58,11 @@ public partial class CircularProgressBar : ContentView
     protected override void OnPropertyChanged(string propertyName = null)
     {
         base.OnPropertyChanged(propertyName);
+
+        if (propertyName == ProgressProperty.PropertyName)
+            graphicsView.Invalidate();
+        if (propertyName == ProgressColorProperty.PropertyName)
+            graphicsView.Invalidate();
 
         if (propertyName == SizeProperty.PropertyName)
         {

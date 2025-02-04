@@ -2,23 +2,12 @@ namespace Skadi.Custom;
 
 public class CircularProgressBarDrawable : BindableObject, IDrawable
 {
-    public static readonly BindableProperty ProgressProperty =
-        BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBarDrawable));
-
-    public static readonly BindableProperty SizeProperty =
-        BindableProperty.Create(nameof(Size), typeof(int), typeof(CircularProgressBarDrawable));
-
-    public static readonly BindableProperty ThicknessProperty =
-        BindableProperty.Create(nameof(Thickness), typeof(int), typeof(CircularProgressBarDrawable));
-
-    public static readonly BindableProperty ProgressColorProperty =
-        BindableProperty.Create(nameof(ProgressColor), typeof(Color), typeof(CircularProgressBarDrawable));
-
-    public static readonly BindableProperty ProgressLeftColorProperty =
-        BindableProperty.Create(nameof(ProgressLeftColor), typeof(Color), typeof(CircularProgressBarDrawable));
-
-    public static readonly BindableProperty TextColorProperty =
-        BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CircularProgressBarDrawable));
+    public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBarDrawable));
+    public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(int), typeof(CircularProgressBarDrawable));
+    public static readonly BindableProperty ThicknessProperty = BindableProperty.Create(nameof(Thickness), typeof(int), typeof(CircularProgressBarDrawable));
+    public static readonly BindableProperty ProgressColorProperty = BindableProperty.Create(nameof(ProgressColor), typeof(Color), typeof(CircularProgressBarDrawable));
+    public static readonly BindableProperty ProgressLeftColorProperty = BindableProperty.Create(nameof(ProgressLeftColor), typeof(Color), typeof(CircularProgressBarDrawable));
+    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CircularProgressBarDrawable));
 
     public int Progress
     {
@@ -78,13 +67,15 @@ public class CircularProgressBarDrawable : BindableObject, IDrawable
             canvas.StrokeColor = ProgressLeftColor;
             canvas.StrokeSize = Thickness;
             canvas.DrawEllipse(x, y, effectiveSize, effectiveSize);
-            
+
+            // Draw arc
             canvas.StrokeColor = ProgressColor;
             canvas.StrokeSize = Thickness;
             canvas.DrawArc(x, y, effectiveSize, effectiveSize, 90, angle, true, false);
         }
         else
         {
+            // Draw circle
             canvas.StrokeColor = ProgressColor;
             canvas.StrokeSize = Thickness;
             canvas.DrawEllipse(x, y, effectiveSize, effectiveSize);
@@ -94,9 +85,8 @@ public class CircularProgressBarDrawable : BindableObject, IDrawable
         float fontSize = effectiveSize / 2.86f;
         canvas.FontSize = fontSize;
         canvas.FontColor = TextColor;
-        float verticalPosition = Size - (fontSize / 2);
-        canvas.DrawString($"Test", x, verticalPosition, effectiveSize, effectiveSize / 4,
-            HorizontalAlignment.Center, VerticalAlignment.Center);
+        float verticalPosition = ((Size / 2) - (fontSize / 2)) * 1.15f;
+        canvas.DrawString($"{Progress}%", x, verticalPosition, effectiveSize, effectiveSize / 4, HorizontalAlignment.Center, VerticalAlignment.Center);
         */
     }
 

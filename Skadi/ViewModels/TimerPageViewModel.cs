@@ -3,6 +3,9 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
+using Microsoft.Maui.Controls.PlatformConfiguration;
+
+using Skadi.Helpers;
 using Skadi.Models;
 
 using System.Reflection.Metadata.Ecma335;
@@ -18,13 +21,23 @@ public partial class TimerPageViewModel : ObservableObject
     [ObservableProperty] private int _second = 0;
     [ObservableProperty] private string _playPauseSymbol = "▶️";
     [ObservableProperty] private bool _isPaused = true;
-    [ObservableProperty] private int _progress = 0;
+    [ObservableProperty] private int _timerProgress = 100;
+
+    private int _originalMinute = 0;
+    private int _originalSecond = 0;
 
     [RelayCommand]
     public async Task FrameTapped()
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         var toast = Toast.Make($"ProgressBar tapped!", ToastDuration.Long, 12);
+        await toast.Show(cancellationTokenSource.Token);
+    }
+
+    private async Task ShowDoneMessage()
+    {
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        var toast = Toast.Make($"Done!", ToastDuration.Long, 14);
         await toast.Show(cancellationTokenSource.Token);
     }
 
@@ -37,6 +50,8 @@ public partial class TimerPageViewModel : ObservableObject
             {
                 PlayPauseSymbol = "⏸️";
                 IsPaused = false;
+                _originalSecond = Second;
+                _originalMinute = Minute;
                 StartCounting();
             }
         }
@@ -45,6 +60,13 @@ public partial class TimerPageViewModel : ObservableObject
             IsPaused = true;
             PlayPauseSymbol = "▶️";
         }
+    }
+
+    private void SetProgress()
+    {
+        
+        int newProgress = TimeHelper.TimeToProgress(Minute, Second, _originalMinute, _originalSecond);
+        TimerProgress = newProgress;
     }
 
     private async void StartCounting()
@@ -68,6 +90,7 @@ public partial class TimerPageViewModel : ObservableObject
                             Second = 59;
                         }
                         Second = Second - 1;
+                        SetProgress();
                             
                     }
                 });
@@ -75,5 +98,9 @@ public partial class TimerPageViewModel : ObservableObject
         }
         IsPaused = true;
         PlayPauseSymbol = "▶️";
+        Second = _originalSecond;
+        Minute = _originalMinute;
+        TimerProgress = 100;
+        await ShowDoneMessage();
     }
 }
