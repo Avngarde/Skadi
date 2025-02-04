@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,13 @@ public partial class CircularProgressBar : ContentView
     {
         InitializeComponent();
     }
-    public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBar));
+    public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBar), 100, propertyChanged: (bindable, oldValue, newValue) =>
+    {
+        if (bindable is CircularProgressBar progressBar)
+        {
+            progressBar.AnimateProgress((int)oldValue, (int)newValue);
+        }
+    });
     public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(int), typeof(CircularProgressBar));
     public static readonly BindableProperty ThicknessProperty = BindableProperty.Create(nameof(Thickness), typeof(int), typeof(CircularProgressBar));
     public static readonly BindableProperty ProgressColorProperty = BindableProperty.Create(nameof(ProgressColor), typeof(Color), typeof(CircularProgressBar));
@@ -55,15 +62,33 @@ public partial class CircularProgressBar : ContentView
         set { SetValue(TextColorProperty, value); }
     }
 
+    private void AnimateProgress(int fromProgress, int toProgress)
+    {
+        var animation = new Animation(
+            callback: value => 
+            {
+                progressBarDrawable.Progress = (int)value;
+                graphicsView.Invalidate();
+            },
+            start: fromProgress,
+            end: toProgress,
+            easing: Easing.Linear
+        );
+
+        animation.Commit(
+            owner: this,
+            name: "ProgressBarUpdateAnimation",
+            length: 250
+        );
+    }
+
     protected override void OnPropertyChanged(string propertyName = null)
     {
         base.OnPropertyChanged(propertyName);
-
         if (propertyName == ProgressProperty.PropertyName)
-            graphicsView.Invalidate();
-        if (propertyName == ProgressColorProperty.PropertyName)
-            graphicsView.Invalidate();
+        {
 
+        }
         if (propertyName == SizeProperty.PropertyName)
         {
             HeightRequest = Size;

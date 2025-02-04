@@ -2,6 +2,7 @@ namespace Skadi.Custom;
 
 public class CircularProgressBarDrawable : BindableObject, IDrawable
 {
+    private double _animatedProgress = 0;
     public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress), typeof(int), typeof(CircularProgressBarDrawable));
     public static readonly BindableProperty SizeProperty = BindableProperty.Create(nameof(Size), typeof(int), typeof(CircularProgressBarDrawable));
     public static readonly BindableProperty ThicknessProperty = BindableProperty.Create(nameof(Thickness), typeof(int), typeof(CircularProgressBarDrawable));
@@ -89,6 +90,7 @@ public class CircularProgressBarDrawable : BindableObject, IDrawable
         canvas.DrawString($"{Progress}%", x, verticalPosition, effectiveSize, effectiveSize / 4, HorizontalAlignment.Center, VerticalAlignment.Center);
         */
     }
+
 
     private float GetAngle(int progress)
     {

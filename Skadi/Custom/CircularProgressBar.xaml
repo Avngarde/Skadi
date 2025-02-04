@@ -7,7 +7,7 @@
              x:Class="Skadi.Custom.CircularProgressBar">
     <GraphicsView x:Name="graphicsView">
         <GraphicsView.Drawable>
-            <customs:CircularProgressBarDrawable
+            <customs:CircularProgressBarDrawable x:Name="progressBarDrawable"
                 Progress="{Binding Progress, Source={x:Reference this}}"
                 Size="{Binding Size, Source={x:Reference this}}"
                 TextColor="{Binding TextColor, Source={x:Reference this}}"
