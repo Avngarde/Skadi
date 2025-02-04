@@ -34,6 +34,17 @@ public partial class TimerPageViewModel : ObservableObject
         await toast.Show(cancellationTokenSource.Token);
     }
 
+    [RelayCommand]
+    public async Task ResetButton()
+    {
+        IsPaused = true;
+        PlayPauseSymbol = "▶️";
+        Second = _originalSecond;
+        Minute = _originalMinute;
+        TimerProgress = 100;
+        await ShowDoneMessage();
+    }
+
     private async Task ShowDoneMessage()
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
