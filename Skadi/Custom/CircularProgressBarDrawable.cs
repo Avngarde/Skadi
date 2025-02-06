@@ -9,6 +9,7 @@ public class CircularProgressBarDrawable : BindableObject, IDrawable
     public static readonly BindableProperty ProgressColorProperty = BindableProperty.Create(nameof(ProgressColor), typeof(Color), typeof(CircularProgressBarDrawable));
     public static readonly BindableProperty ProgressLeftColorProperty = BindableProperty.Create(nameof(ProgressLeftColor), typeof(Color), typeof(CircularProgressBarDrawable));
     public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CircularProgressBarDrawable));
+    public static readonly BindableProperty ProgressTextProperty = BindableProperty.Create(nameof(ProgressText), typeof(string), typeof(CircularProgressBarDrawable));
 
     public int Progress
     {
@@ -46,6 +47,12 @@ public class CircularProgressBarDrawable : BindableObject, IDrawable
         set { SetValue(TextColorProperty, value); }
     }
 
+    public string ProgressText
+    {
+        get { return (string)GetValue(ProgressTextProperty); }
+        set { SetValue(ProgressTextProperty, value); }
+    }
+    
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
         float effectiveSize = Size - Thickness;
@@ -82,13 +89,16 @@ public class CircularProgressBarDrawable : BindableObject, IDrawable
             canvas.DrawEllipse(x, y, effectiveSize, effectiveSize);
         }
 
-        /*
-        float fontSize = effectiveSize / 2.86f;
+        
+        float fontSize = 50;
         canvas.FontSize = fontSize;
         canvas.FontColor = TextColor;
-        float verticalPosition = ((Size / 2) - (fontSize / 2)) * 1.15f;
-        canvas.DrawString($"{Progress}%", x, verticalPosition, effectiveSize, effectiveSize / 4, HorizontalAlignment.Center, VerticalAlignment.Center);
-        */
+        float verticalPosition = (float)(Size / 2.5);
+        if (ProgressText == null)
+            canvas.DrawString($"00:00", x, verticalPosition, effectiveSize, effectiveSize / 4, HorizontalAlignment.Center, VerticalAlignment.Center);
+        else
+            canvas.DrawString($"{ProgressText}", x, verticalPosition, effectiveSize, effectiveSize / 4, HorizontalAlignment.Center, VerticalAlignment.Center);
+        
     }
 
 

@@ -25,6 +25,7 @@ public partial class CircularProgressBar : ContentView
     public static readonly BindableProperty ProgressColorProperty = BindableProperty.Create(nameof(ProgressColor), typeof(Color), typeof(CircularProgressBar));
     public static readonly BindableProperty ProgressLeftColorProperty = BindableProperty.Create(nameof(ProgressLeftColor), typeof(Color), typeof(CircularProgressBar));
     public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CircularProgressBar));
+    public static readonly BindableProperty ProgressTextProperty = BindableProperty.Create(nameof(Thickness), typeof(string), typeof(CircularProgressBar));
 
     public int Progress
     {
@@ -61,6 +62,12 @@ public partial class CircularProgressBar : ContentView
         get { return (Color)GetValue(TextColorProperty); }
         set { SetValue(TextColorProperty, value); }
     }
+    
+    public string ProgressText
+    {
+        get { return (string)GetValue(ProgressTextProperty); }
+        set { SetValue(ProgressTextProperty, value); }
+    }
 
     private void AnimateProgress(int fromProgress, int toProgress)
     {
@@ -68,6 +75,7 @@ public partial class CircularProgressBar : ContentView
             callback: value => 
             {
                 progressBarDrawable.Progress = (int)value;
+                progressBarDrawable.ProgressText = ProgressText;
                 graphicsView.Invalidate();
             },
             start: fromProgress,

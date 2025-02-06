@@ -22,6 +22,7 @@ public partial class TimerPageViewModel : ObservableObject
     [ObservableProperty] private string _playPauseSymbol = "▶️";
     [ObservableProperty] private bool _isPaused = true;
     [ObservableProperty] private int _timerProgress = 100;
+    [ObservableProperty] private string _timePrint = "00:00";
 
     private int _originalMinute = 0;
     private int _originalSecond = 0;
@@ -42,6 +43,7 @@ public partial class TimerPageViewModel : ObservableObject
         Second = _originalSecond;
         Minute = _originalMinute;
         TimerProgress = 100;
+        SetTimerProgressText();
         await ShowDoneMessage();
     }
 
@@ -73,9 +75,18 @@ public partial class TimerPageViewModel : ObservableObject
         }
     }
 
+    private void SetTimerProgressText()
+    {
+        string minuteString = Minute.ToString();
+        string secondString = Second.ToString();
+        if (Minute < 10) minuteString = "0" + minuteString;
+        if (Second < 10) secondString = "0" + secondString;
+
+        TimePrint = $"{minuteString}:{secondString}";
+    }
+
     private void SetProgress()
     {
-        
         int newProgress = TimeHelper.TimeToProgress(Minute, Second, _originalMinute, _originalSecond);
         TimerProgress = newProgress;
     }
@@ -102,6 +113,7 @@ public partial class TimerPageViewModel : ObservableObject
                         }
                         Second = Second - 1;
                         SetProgress();
+                        SetTimerProgressText();
                             
                     }
                 });
@@ -112,6 +124,7 @@ public partial class TimerPageViewModel : ObservableObject
         Second = _originalSecond;
         Minute = _originalMinute;
         TimerProgress = 100;
-        await ShowDoneMessage();
+        SetTimerProgressText();
+;        await ShowDoneMessage();
     }
 }
