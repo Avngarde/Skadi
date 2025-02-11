@@ -24,6 +24,7 @@ public partial class TimerPageViewModel : ObservableObject
     [ObservableProperty] private int _timerProgress = 100;
     [ObservableProperty] private string _timePrint = "00:00";
 
+    private bool _setOriginalTime = true;
     private int _originalMinute = 0;
     private int _originalSecond = 0;
 
@@ -40,6 +41,7 @@ public partial class TimerPageViewModel : ObservableObject
     {
         IsPaused = true;
         PlayPauseSymbol = "▶️";
+        _setOriginalTime = true;
         Second = _originalSecond;
         Minute = _originalMinute;
         TimerProgress = 100;
@@ -63,8 +65,13 @@ public partial class TimerPageViewModel : ObservableObject
             {
                 PlayPauseSymbol = "⏸️";
                 IsPaused = false;
-                _originalSecond = Second;
-                _originalMinute = Minute;
+                if (_setOriginalTime)
+                {
+                    _originalSecond = Second;
+                    _originalMinute = Minute;
+                }
+                _setOriginalTime = false;
+
                 StartCounting();
             }
         }
@@ -119,12 +126,13 @@ public partial class TimerPageViewModel : ObservableObject
                 });
             }
         }
-        IsPaused = true;
         PlayPauseSymbol = "▶️";
         Second = _originalSecond;
         Minute = _originalMinute;
         TimerProgress = 100;
+        _setOriginalTime = true;
+        IsPaused = true;
         SetTimerProgressText();
-;        await ShowDoneMessage();
+;       await ShowDoneMessage();
     }
 }
