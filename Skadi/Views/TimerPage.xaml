@@ -22,15 +22,15 @@
                 Thickness="60" />
         </Frame>
         
-        <Grid Margin="50, 30, 50, 0">
+        <Grid Margin="80, 30, 80, 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40*" />
+                <ColumnDefinition Width="60*" />
                 <ColumnDefinition Width="5*"  />
-                <ColumnDefinition Width="40*" />
+                <ColumnDefinition Width="60*" />
             </Grid.ColumnDefinitions>
-            <Picker ItemsSource="{Binding Minutes}" HorizontalTextAlignment="Center" FontSize="25" SelectedItem="{Binding Minute}" HorizontalOptions="End" />
+            <Picker ItemsSource="{Binding Minutes}" HorizontalTextAlignment="Center" FontSize="30" SelectedItem="{Binding Minute}" />
             <Label Text=":" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="25" />
-            <Picker Grid.Column="2" ItemsSource="{Binding Seconds}" FontSize="25" HorizontalTextAlignment="Center" SelectedItem="{Binding Second}" HorizontalOptions="Start" />
+            <Picker Grid.Column="2" ItemsSource="{Binding Seconds}" FontSize="30" HorizontalTextAlignment="Center" SelectedItem="{Binding Second}" />
         </Grid>
         
         <Grid Margin="0,20,0,0">
