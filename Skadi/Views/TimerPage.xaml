@@ -40,7 +40,7 @@
                 <ColumnDefinition Width="50*" />
             </Grid.ColumnDefinitions>
             
-            <Button mi:MauiIcon.Value="{mi:Fluent RecordStop48}"  Margin="10" BackgroundColor="IndianRed" FontSize="30" Command="{Binding ResetButtonCommand}" />
+            <Button mi:MauiIcon.Value="{mi:Fluent RecordStop48}" Margin="10" BackgroundColor="IndianRed" FontSize="30" Command="{Binding ResetButtonCommand}" />
             <Button Grid.Column="1" mi:MauiIcon.Value="{mi:Fluent Icon={Binding PlayPauseSymbol}}" Margin="10" BackgroundColor="Green" FontSize="30" Command="{Binding PlayPauseClickedCommand}" />
         </Grid>
     </VerticalStackLayout>

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              xmlns:viewModels="clr-namespace:Skadi.ViewModels"
              x:Class="Skadi.Views.MainPage">
     <ContentPage.BindingContext>
@@ -8,8 +9,8 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="OpenAddWorkoutForm" Text="+" Command="{Binding OpenAddWorkoutFormCommand}"></ToolbarItem>
-        <ToolbarItem x:Name="OpenTimerForm" Text="⏰" Command="{Binding OpenTimerCommand}"/>
+        <ToolbarItem x:Name="OpenAddWorkoutForm" mi:MauiIcon.Value="{mi:Fluent AddCircle16}" Command="{Binding OpenAddWorkoutFormCommand}"></ToolbarItem>
+        <ToolbarItem x:Name="OpenTimerForm" mi:MauiIcon.Value="{mi:Fluent ClockAlarm16}" Command="{Binding OpenTimerCommand}"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
