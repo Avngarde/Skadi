@@ -1,4 +1,6 @@
-﻿namespace Skadi;
+﻿using MauiIcons.Core;
+
+namespace Skadi;
 
 public partial class App : Application
 {
@@ -7,5 +9,6 @@ public partial class App : Application
         InitializeComponent();
 
         MainPage = new AppShell();
+        _ = new MauiIcon();
     }
 }

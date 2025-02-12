@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using MauiIcons.Core;
+using MauiIcons.Fluent;
 
 namespace Skadi;
 
@@ -11,6 +13,11 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UseMauiIconsCore(x =>
+            {
+                x.SetDefaultFontOverride(true);
+            })
+            .UseFluentMauiIcons()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

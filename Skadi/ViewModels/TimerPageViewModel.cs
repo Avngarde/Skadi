@@ -10,6 +10,7 @@ using Skadi.Models;
 
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
+using MauiIcons.Fluent;
 
 namespace Skadi.ViewModels;
 
@@ -19,7 +20,7 @@ public partial class TimerPageViewModel : ObservableObject
     [ObservableProperty] private int[] _seconds = Enumerable.Range(0, 60).ToArray();
     [ObservableProperty] private int _minute = 0;
     [ObservableProperty] private int _second = 0;
-    [ObservableProperty] private string _playPauseSymbol = "▶️";
+    [ObservableProperty] private FluentIcons _playPauseSymbol = FluentIcons.Play48;
     [ObservableProperty] private bool _isPaused = true;
     [ObservableProperty] private int _timerProgress = 100;
     [ObservableProperty] private string _timePrint = "00:00";
@@ -40,7 +41,7 @@ public partial class TimerPageViewModel : ObservableObject
     public async Task ResetButton()
     {
         IsPaused = true;
-        PlayPauseSymbol = "▶️";
+        PlayPauseSymbol = FluentIcons.Play48;
         _setOriginalTime = true;
         Second = _originalSecond;
         Minute = _originalMinute;
@@ -59,11 +60,11 @@ public partial class TimerPageViewModel : ObservableObject
     [RelayCommand]
     public void PlayPauseClicked()
     {
-        if (PlayPauseSymbol == "▶️")
+        if (PlayPauseSymbol == FluentIcons.Play48)
         {
             if (Second > 0 || Minute > 0)
             {
-                PlayPauseSymbol = "⏸️";
+                PlayPauseSymbol = FluentIcons.Pause48;
                 IsPaused = false;
                 if (_setOriginalTime)
                 {
@@ -78,7 +79,7 @@ public partial class TimerPageViewModel : ObservableObject
         else
         {
             IsPaused = true;
-            PlayPauseSymbol = "▶️";
+            PlayPauseSymbol = FluentIcons.Play48;
         }
     }
 
@@ -126,7 +127,7 @@ public partial class TimerPageViewModel : ObservableObject
                 });
             }
         }
-        PlayPauseSymbol = "▶️";
+        PlayPauseSymbol = FluentIcons.Play48;
         Second = _originalSecond;
         Minute = _originalMinute;
         TimerProgress = 100;
