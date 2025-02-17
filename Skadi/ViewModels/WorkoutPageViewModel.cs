@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
 using Skadi.Models;
+using Skadi.Views;
 
 namespace Skadi.ViewModels
 {
@@ -17,6 +19,13 @@ namespace Skadi.ViewModels
         public WorkoutPageViewModel()
         {
            
+        }
+
+        [RelayCommand]
+        public async Task OpenAddExerciseForm()
+        {
+            AddExerciseForm addExerciseForm = new();
+            await Application.Current.MainPage.Navigation.PushAsync(addExerciseForm);
         }
     }
 }

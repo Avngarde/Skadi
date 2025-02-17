@@ -2,12 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Skadi.ViewModels"
+             xmlns:mi="http://www.aathifmahir.com/dotnet/2022/maui/icons"
              x:Class="Skadi.Views.WorkoutPage"
              Title="{Binding WorkoutName}">
 
     <ContentPage.BindingContext>
         <viewModels:WorkoutPageViewModel />
     </ContentPage.BindingContext>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="OpenAddExerciseForm" mi:MauiIcon.Value="{mi:Fluent AddCircle16, IconSize=25}" Command="{Binding OpenAddExerciseFormCommand}" />
+    </ContentPage.ToolbarItems>
     
     <VerticalStackLayout>
         <Label 
