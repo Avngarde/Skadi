@@ -9,8 +9,8 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="OpenAddWorkoutForm" mi:MauiIcon.Value="{mi:Fluent AddCircle16}" Command="{Binding OpenAddWorkoutFormCommand}"></ToolbarItem>
-        <ToolbarItem x:Name="OpenTimerForm" mi:MauiIcon.Value="{mi:Fluent ClockAlarm16}" Command="{Binding OpenTimerCommand}"/>
+        <ToolbarItem x:Name="OpenAddWorkoutForm" mi:MauiIcon.Value="{mi:Fluent AddCircle16, IconSize=25}" Command="{Binding OpenAddWorkoutFormCommand}" />
+        <ToolbarItem x:Name="OpenTimerForm" mi:MauiIcon.Value="{mi:Fluent ClockAlarm16, IconSize=25}" Command="{Binding OpenTimerCommand}" />
     </ContentPage.ToolbarItems>
 
     <ScrollView>
@@ -20,7 +20,7 @@
                     <Border Margin="10" Padding="10" StrokeShape="RoundRectangle 5,5,5,5">
                         <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
                             <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Path=BindingContext.WorkoutTapCommand, Source={x:Reference Name=WorkoutsLayout}}" CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer Command="{Binding Path=BindingContext.OpenWorkoutCommand, Source={x:Reference Name=WorkoutsLayout}}" CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80*" />

@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="60*" />
             </Grid.ColumnDefinitions>
             <Picker ItemsSource="{Binding Minutes}" HorizontalTextAlignment="Center" FontSize="30" SelectedItem="{Binding Minute}" />
-            <Label Text=":" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="25" />
+            <Label Text="-" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="25" />
             <Picker Grid.Column="2" ItemsSource="{Binding Seconds}" FontSize="30" HorizontalTextAlignment="Center" SelectedItem="{Binding Second}" />
         </Grid>
         

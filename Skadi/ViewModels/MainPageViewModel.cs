@@ -1,11 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Core;
 using Skadi.Services;
 using Skadi.Models;
 using Skadi.Views;
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
 
 namespace Skadi.ViewModels;
 
@@ -26,6 +26,24 @@ public partial class MainPageViewModel : ObservableObject
     {
         TimerPage timerPage = new();
         await Application.Current.MainPage.Navigation.PushAsync(timerPage);
+    }
+
+    [RelayCommand]
+    public async Task OpenWorkout(WorkoutMainPage workout)
+    {
+        WorkoutPage workoutPage = new WorkoutPage();
+        if (workoutPage.BindingContext is WorkoutPageViewModel viewModel)
+        {
+            viewModel.WorkoutName = workout.WorkoutName;
+            viewModel.Workout = new Workout()
+            {
+                Id = workout.Id,
+                WorkoutName = workout.WorkoutName,
+                Difficulty = workout.Difficulty,
+                Rounds = Convert.ToInt16(workout.RoundsText.Split(':')[1])
+            };
+        }
+        await Application.Current.MainPage.Navigation.PushAsync(workoutPage);
     }
 
     [RelayCommand]
