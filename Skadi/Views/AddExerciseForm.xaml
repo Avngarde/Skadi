@@ -39,6 +39,6 @@
         
         <Entry Placeholder="Repetitions" IsVisible="{Binding RepetitionsVisible}" Text="{Binding Repetitions}" />
         <Picker Title="Exercise Type" ItemsSource="{Binding ExerciseTypes}" SelectedIndex="{Binding ExerciseTypeIndex}" />
-        <Button Text="Add Exercise" />
+        <Button Text="Add Exercise" Command="{Binding AddExerciseCommand}" />
     </VerticalStackLayout>
 </ContentPage>

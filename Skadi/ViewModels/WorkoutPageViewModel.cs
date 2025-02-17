@@ -24,7 +24,7 @@ namespace Skadi.ViewModels
         [RelayCommand]
         public async Task OpenAddExerciseForm()
         {
-            AddExerciseForm addExerciseForm = new();
+            AddExerciseForm addExerciseForm = new(Workout.Id);
             await Application.Current.MainPage.Navigation.PushAsync(addExerciseForm);
         }
     }

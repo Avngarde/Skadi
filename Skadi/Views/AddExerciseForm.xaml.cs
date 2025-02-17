@@ -9,9 +9,12 @@ namespace Skadi.Views;
 
 public partial class AddExerciseForm : ContentPage
 {
-    public AddExerciseForm()
+    public AddExerciseForm(int workoutId)
     {
         InitializeComponent();
+        var vm = BindingContext as AddExerciseFormViewModel;
+        if (vm is not null)
+            vm.WorkoutId = workoutId;
     }
 
     private void Switch_OnToggled(object? sender, ToggledEventArgs e)
