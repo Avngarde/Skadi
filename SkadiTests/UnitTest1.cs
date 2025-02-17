@@ -54,4 +54,41 @@ public class Tests
         int progress2 = TimeHelper.TimeToProgress(2, 30, 2, 40);
         Assert.Pass();
     }
+    
+    [Test]
+    public async Task AddingNewExerciseTest()
+    {
+        string tempDirectory = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempDirectory);
+        
+        var mockFileSystemHelper = new Mock<IFileSystemHelper>();
+        mockFileSystemHelper.Setup(f => f.AppDataDirectory).Returns(tempDirectory);
+        DbConfig dbConfig = new(mockFileSystemHelper.Object);
+        
+        Skadi.Services.ExerciseService exerciseService = new(dbConfig);
+        await exerciseService.InitTableIfDoesNotExist();
+        Exercise[] exercises = await exerciseService.GetAllExercises(1);
+        int count = exercises.Length;
+
+        Skadi.Models.Exercise exercise = new()
+        {
+            ExerciseName = "Test1",
+            Repetitions = 3,
+            DurationMinutes = 0,
+            DurationSeconds = 30,
+            ExerciseType = ExerciseType.Strength,
+            WorkoutId = 1
+        };
+
+        await exerciseService.CreateExercise(exercise);
+        exercises = await exerciseService.GetAllExercises(1);
+        if (exercises.Length > count)
+        {
+            Assert.Pass();
+        }
+        else
+        {
+            Assert.Fail();
+        }
+    }
 }
