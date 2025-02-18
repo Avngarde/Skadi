@@ -42,6 +42,7 @@ public partial class MainPageViewModel : ObservableObject
                 Difficulty = workout.Difficulty,
                 Rounds = Convert.ToInt16(workout.RoundsText.Split(':')[1])
             };
+            await viewModel.LoadExercises();
         }
         await Application.Current.MainPage.Navigation.PushAsync(workoutPage);
     }
@@ -56,11 +57,11 @@ public partial class MainPageViewModel : ObservableObject
 
     public MainPageViewModel()
     {
-        LoadWorkoutsAsync();
+        _ = LoadWorkoutsAsync();
         WeakReferenceMessenger.Default.Register<string>(this, (r, m) =>
         {
             if (m == "RefreshWorkouts")
-                LoadWorkoutsAsync();
+                _ = LoadWorkoutsAsync();
         });        
     }
     

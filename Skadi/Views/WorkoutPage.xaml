@@ -13,11 +13,35 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="OpenAddExerciseForm" mi:MauiIcon.Value="{mi:Fluent AddCircle16, IconSize=25}" Command="{Binding OpenAddExerciseFormCommand}" />
     </ContentPage.ToolbarItems>
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Exercise!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ScrollView>
+        <StackLayout x:Name="WorkoutsLayout" BindableLayout.ItemsSource="{Binding Exercises}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="10" Padding="10" StrokeShape="RoundRectangle 5,5,5,5">
+                        <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80*" />
+                                <ColumnDefinition Width="20*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50*" />
+                                    <RowDefinition Height="50*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" Text="{Binding ExerciseName}" />
+                                <Label Grid.Row="1" Text="{Binding Laps}" TextColor="SlateGray"/>
+                            </Grid>
+
+                            <Border Grid.Column="1" StrokeShape="RoundRectangle 5,5,5,5">
+                                <Label Text="{Binding ExerciseType}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

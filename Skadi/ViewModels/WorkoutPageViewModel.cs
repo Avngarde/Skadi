@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using Skadi.Models;
 using Skadi.Views;
+using Skadi.Services;
 
 namespace Skadi.ViewModels
 {
@@ -15,10 +16,13 @@ namespace Skadi.ViewModels
         public Workout Workout { get; set; }
 
         [ObservableProperty] public string _workoutName;
+        [ObservableProperty] public Exercise[] exercises;
 
-        public WorkoutPageViewModel()
+        public async Task LoadExercises()
         {
-           
+            ExerciseService exerciseService = new();
+            Exercise[] exercisesList = await exerciseService.GetAllExercises(Workout.Id);
+            Exercises = exercisesList;
         }
 
         [RelayCommand]
