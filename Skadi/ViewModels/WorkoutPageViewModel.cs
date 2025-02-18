@@ -31,6 +31,7 @@ namespace Skadi.ViewModels
                         ExerciseName = exercise.ExerciseName,
                         DurationRepetitionText = CreateDurationRepetitionText(exercise),
                         ExerciseType = exercise.ExerciseType,
+                        Laps = $"Laps: {exercise.Laps}"
                     }
                 );
             }
@@ -67,5 +68,6 @@ namespace Skadi.ViewModels
         public string ExerciseName { get; set; }
         public string DurationRepetitionText { get; set; }
         public ExerciseType ExerciseType { get; set; }
+        public string Laps { get; set; }
     }
 }

@@ -15,6 +15,7 @@ public partial class AddExerciseFormViewModel : ObservableObject
     [ObservableProperty] private int _minutesDuration = 0;
     [ObservableProperty] private int _secondsDuration = 0;
     [ObservableProperty] private int _exerciseTypeIndex = 0;
+    [ObservableProperty] private int _laps = 0;
 
     public int WorkoutId { get; set; }
     
@@ -49,6 +50,7 @@ public partial class AddExerciseFormViewModel : ObservableObject
             DurationMinutes = MinutesDuration,
             DurationSeconds = SecondsDuration,
             ExerciseType = GetExerciseTypeFromIndex(),
+            Laps = Laps,
             WorkoutId = WorkoutId
         };
 
