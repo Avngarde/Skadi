@@ -22,7 +22,7 @@
                         <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="80*" />
-                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="35*" />
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
