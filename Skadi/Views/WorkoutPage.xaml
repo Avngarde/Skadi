@@ -32,7 +32,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Text="{Binding ExerciseName}" />
-                                <Label Grid.Row="1" Text="{Binding Laps}" TextColor="SlateGray"/>
+                                <Label Grid.Row="1" Text="{Binding DurationRepetitionText}" TextColor="SlateGray"/>
                             </Grid>
 
                             <Border Grid.Column="1" StrokeShape="RoundRectangle 5,5,5,5">

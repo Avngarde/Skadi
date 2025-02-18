@@ -16,13 +16,41 @@ namespace Skadi.ViewModels
         public Workout Workout { get; set; }
 
         [ObservableProperty] public string _workoutName;
-        [ObservableProperty] public Exercise[] exercises;
+        [ObservableProperty] public ExerciseLayoutDto[] _exercises;
 
         public async Task LoadExercises()
         {
             ExerciseService exerciseService = new();
             Exercise[] exercisesList = await exerciseService.GetAllExercises(Workout.Id);
-            Exercises = exercisesList;
+            List<ExerciseLayoutDto> dtoExercises = new List<ExerciseLayoutDto>();
+            foreach(Exercise exercise in exercisesList)
+            {
+                dtoExercises.Add(
+                    new ExerciseLayoutDto()
+                    {
+                        ExerciseName = exercise.ExerciseName,
+                        DurationRepetitionText = CreateDurationRepetitionText(exercise),
+                        ExerciseType = exercise.ExerciseType,
+                    }
+                );
+            }
+
+            Exercises = dtoExercises.ToArray();
+        }
+
+        private string CreateDurationRepetitionText(Exercise exercise)
+        {
+            if(exercise.Repetitions > 0)
+            {
+                return $"Repetitions: {exercise.Repetitions}";
+            }
+            else
+            {
+                string durationMinutesText = exercise.DurationMinutes < 10 ? $"0{exercise.DurationMinutes}" : exercise.DurationMinutes.ToString();
+                string durationSecondsText = exercise.DurationSeconds < 10 ? $"0{exercise.DurationSeconds}" : exercise.DurationSeconds.ToString();
+
+                return $"Duration {durationMinutesText}:{durationSecondsText}";
+            }
         }
 
         [RelayCommand]
@@ -31,5 +59,13 @@ namespace Skadi.ViewModels
             AddExerciseForm addExerciseForm = new(Workout.Id);
             await Application.Current.MainPage.Navigation.PushAsync(addExerciseForm);
         }
+    }
+
+
+    public class ExerciseLayoutDto
+    {
+        public string ExerciseName { get; set; }
+        public string DurationRepetitionText { get; set; }
+        public ExerciseType ExerciseType { get; set; }
     }
 }
