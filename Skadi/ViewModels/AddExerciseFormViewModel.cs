@@ -67,14 +67,17 @@ public partial class AddExerciseFormViewModel : ObservableObject
                 exerType = ExerciseType.Plyometrics;
                 break;   
             case 2:
-                exerType = ExerciseType.Technical;
+                exerType = ExerciseType.Technique;
                 break;
             case 3:
                 exerType = ExerciseType.Strength;
                 break;      
             case 4:
                 exerType = ExerciseType.Stretching;
-                break;                
+                break;
+            case 5:
+                exerType = ExerciseType.Warmup;
+                break;
         }
 
         return exerType;

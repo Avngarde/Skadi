@@ -20,7 +20,8 @@ public enum ExerciseType
 {
     Cardio,
     Plyometrics,
-    Technical,
+    Technique,
     Strength,
-    Stretching
+    Stretching,
+    Warmup
 }

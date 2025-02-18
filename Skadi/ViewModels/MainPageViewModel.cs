@@ -62,7 +62,7 @@ public partial class MainPageViewModel : ObservableObject
         {
             if (m == "RefreshWorkouts")
                 _ = LoadWorkoutsAsync();
-        });        
+        });
     }
     
     private async Task LoadWorkoutsAsync()
