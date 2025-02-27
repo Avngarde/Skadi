@@ -7,9 +7,5 @@
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
     <DefaultDevice>pixel_6_pro_-_api_25</DefaultDevice>
   </PropertyGroup>
-  <ItemGroup>
-    <MauiXaml Update="Views\WorkoutPage.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-  </ItemGroup>
+  <ItemGroup />
 </Project>

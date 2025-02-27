@@ -90,6 +90,7 @@ public partial class TimerPageViewModel : ObservableObject
         if (Minute < 10) minuteString = "0" + minuteString;
         if (Second < 10) secondString = "0" + secondString;
 
+
         TimePrint = $"{minuteString}:{secondString}";
     }
 
