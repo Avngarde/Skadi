@@ -11,6 +11,7 @@
     </ContentPage.BindingContext>
     
     <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="PlayWorkout" mi:MauiIcon.Value="{mi:Fluent Play16, IconSize=28}" Command="{Binding OpenWorkoutPlayPageCommand}" />
         <ToolbarItem x:Name="OpenAddExerciseForm" mi:MauiIcon.Value="{mi:Fluent Add16, IconSize=30}" Command="{Binding OpenAddExerciseFormCommand}" />
     </ContentPage.ToolbarItems>
 
