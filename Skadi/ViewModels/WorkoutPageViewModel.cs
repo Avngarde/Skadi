@@ -68,7 +68,7 @@ namespace Skadi.ViewModels
         public async Task OpenWorkoutPlayPage()
         {
             WorkoutPlayPage workoutPlayPage = new();
-            await Application.Current.MainPage.Navigation.PushModalAsync(workoutPlayPage);
+            await Application.Current.MainPage.Navigation.PushAsync(workoutPlayPage);
         }
     }
  

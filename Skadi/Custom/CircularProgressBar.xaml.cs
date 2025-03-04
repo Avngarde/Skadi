@@ -86,7 +86,7 @@ public partial class CircularProgressBar : ContentView
         animation.Commit(
             owner: this,
             name: "ProgressBarUpdateAnimation",
-            length: 650
+            length: 350
         );
     }
 
