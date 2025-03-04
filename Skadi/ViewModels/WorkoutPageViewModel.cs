@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using Skadi.Models;
 using Skadi.Views;
 using Skadi.Services;
+using Skadi.Helpers;
 
 namespace Skadi.ViewModels
 {
@@ -25,13 +26,15 @@ namespace Skadi.ViewModels
             List<ExerciseLayoutDto> dtoExercises = new List<ExerciseLayoutDto>();
             foreach(Exercise exercise in exercisesList)
             {
+                Color textColor = ColoursHelper.GetExerciseTypeColor(exercise.ExerciseType);
                 dtoExercises.Add(
                     new ExerciseLayoutDto()
                     {
                         ExerciseName = exercise.ExerciseName,
                         DurationRepetitionText = CreateDurationRepetitionText(exercise),
                         ExerciseType = exercise.ExerciseType,
-                        Laps = $"Laps: {exercise.Laps}"
+                        Laps = $"Laps: {exercise.Laps}",
+                        TextColor = textColor
                     }
                 );
             }
@@ -69,5 +72,6 @@ namespace Skadi.ViewModels
         public string DurationRepetitionText { get; set; }
         public ExerciseType ExerciseType { get; set; }
         public string Laps { get; set; }
+        public Color TextColor { get; set; }
     }
 }

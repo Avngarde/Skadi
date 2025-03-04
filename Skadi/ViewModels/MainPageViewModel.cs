@@ -6,6 +6,7 @@ using CommunityToolkit.Maui.Core;
 using Skadi.Services;
 using Skadi.Models;
 using Skadi.Views;
+using Skadi.Helpers;
 
 namespace Skadi.ViewModels;
 
@@ -71,30 +72,13 @@ public partial class MainPageViewModel : ObservableObject
         Workout[] workoutsDb = await new WorkoutService().GetAllWorkouts();
         foreach (var wrkout in workoutsDb)
         {
-            Color colorBackground;
-            Color colorText;
-            if (wrkout.Difficulty == Difficulty.Hard)
-            {
-                colorBackground = Color.FromRgba(255, 230, 226, 255);
-                colorText = Color.FromRgba(230,166,160,255);
-            }
-            else if (wrkout.Difficulty == Difficulty.Medium)
-            {
-                colorBackground = Color.FromRgba(254, 248, 221, 255);
-                colorText = Color.FromRgba(227,180,99,255);
-            }
-            else
-            {
-                colorBackground = Color.FromRgba(219, 254, 227, 255);
-                colorText = Color.FromRgba(80,202,83,255);
-            }
-
+            (Color, Color) colors = ColoursHelper.GetWorkoutColours(wrkout.Difficulty);
             workoutsMainPageList.Add(
                 new WorkoutMainPage()
                 {
                     Difficulty = wrkout.Difficulty,
-                    DifficultyColor = colorBackground,
-                    DifficultyTextColor = colorText,
+                    DifficultyColor = colors.Item1,
+                    DifficultyTextColor = colors.Item2,
                     Id = wrkout.Id,
                     RoundsText = $"Rounds: {wrkout.Rounds}",
                     WorkoutName = wrkout.WorkoutName

@@ -37,9 +37,7 @@
                                 <Label Grid.Row="2" Text="{Binding Laps}" TextColor="SlateGray"/>
                             </Grid>
 
-                            <Border Grid.Column="1" StrokeShape="RoundRectangle 5,5,5,5">
-                                <Label Text="{Binding ExerciseType}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" />
-                            </Border>
+                            <Label Grid.Column="1" FontSize="Medium" FontAttributes="Bold" Text="{Binding ExerciseType}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{Binding TextColor}" />
                         </Grid>
                     </Border>
                 </DataTemplate>
