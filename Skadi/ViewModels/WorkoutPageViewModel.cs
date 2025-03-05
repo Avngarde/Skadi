@@ -68,6 +68,11 @@ namespace Skadi.ViewModels
         public async Task OpenWorkoutPlayPage()
         {
             WorkoutPlayPage workoutPlayPage = new();
+            if (workoutPlayPage.BindingContext is WorkoutPlayPageViewModel viewModel)
+            {
+                viewModel.WorkoutId = Workout.Id;
+                await viewModel.LoadExercises();
+            }
             await Application.Current.MainPage.Navigation.PushAsync(workoutPlayPage);
         }
     }
