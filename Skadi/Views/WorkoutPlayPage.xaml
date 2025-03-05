@@ -9,7 +9,35 @@
         <Label Text="Exercise test name" HorizontalOptions="Center" Margin="0,30,0,0" FontAttributes="Bold" FontSize="30" />
         <Label Text="Lap - 1/3" HorizontalOptions="Center" Margin="0,10,0,10" FontAttributes="Bold" FontSize="30" />
 
-        <VerticalStackLayout>
+        <Grid Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="70*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Next exercise:"  HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="10,0,0,0" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium" />
+            <Border Grid.Column="1" VerticalOptions="Center" Margin="10" Padding="10" StrokeShape="RoundRectangle 5,5,5,5">
+                <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80*" />
+                        <ColumnDefinition Width="35*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Text="Push ups" FontSize="Medium" />
+                        <Label Grid.Row="1" Text="Duration: 02:30" TextColor="SlateGray" FontSize="Medium" />
+                        <Label Grid.Row="2" Text="Laps: 3" TextColor="SlateGray" FontSize="Medium" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <VerticalStackLayout Margin="0,20,0,0">
             <Frame Grid.Row="0" BorderColor="Transparent">
                 <customs:CircularProgressBar
                     Progress="90"
@@ -22,32 +50,5 @@
             <Button Grid.Column="1" mi:MauiIcon.Value="{mi:Fluent Icon=Pause16}" Margin="10" BackgroundColor="Green" FontSize="30" />
         </VerticalStackLayout>
 
-        <Grid Margin="0,5,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40*" />
-                <ColumnDefinition Width="80*" />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Text="Next exercise:"  HorizontalOptions="Center" HorizontalTextAlignment="Center" Margin="10,0,0,0" VerticalOptions="Center" FontAttributes="Bold" FontSize="20" />
-            <Border Grid.Column="1" VerticalOptions="Center" Margin="10" Padding="10" StrokeShape="RoundRectangle 5,5,5,5">
-                        <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80*" />
-                                <ColumnDefinition Width="35*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50*" />
-                                    <RowDefinition Height="50*" />
-                                    <RowDefinition Height="50*" />
-                                </Grid.RowDefinitions>
-
-                                <Label Grid.Row="0" Text="Push ups" FontSize="Large" />
-                                <Label Grid.Row="1" Text="Duration: 02:30" TextColor="SlateGray" FontSize="Large" />
-                                <Label Grid.Row="2" Text="Laps: 3" TextColor="SlateGray" FontSize="Large" />
-                            </Grid>
-                        </Grid>
-            </Border>
-        </Grid>
     </VerticalStackLayout>
 </ContentPage>
