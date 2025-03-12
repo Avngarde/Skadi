@@ -91,4 +91,21 @@ public class Tests
             Assert.Fail();
         }
     }
+
+    [Test]
+    public void ColourHelperTest()
+    {
+        (Color,Color) coloursWorkout = ColoursHelper.GetWorkoutColours(Difficulty.Hard);
+        Color exerciseTypeColor = ColoursHelper.GetExerciseTypeColor(ExerciseType.Technique);
+        if (exerciseTypeColor.Red != 255 && exerciseTypeColor.Green != 180 && exerciseTypeColor.Blue != 67)
+        {
+            Assert.Fail();
+        }
+
+        else
+        {
+            Assert.Pass();
+        }
+
+    }
 }
