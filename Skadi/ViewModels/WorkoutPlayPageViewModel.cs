@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-
+using CommunityToolkit.Mvvm.Input;
 using Skadi.Models;
 using Skadi.Services;
 
@@ -31,6 +31,12 @@ namespace Skadi.ViewModels
         [ObservableProperty] private bool _showDuration = true;
         [ObservableProperty] private bool _showRepetition = false;
 
+        [RelayCommand]
+        public async Task RepetitionsDone()
+        {
+            
+        }
+
         public async Task LoadExercises()
         {
             ExerciseService exerciseService = new();
@@ -44,10 +50,10 @@ namespace Skadi.ViewModels
             CurrentExerciseName = Exercise.ExerciseName;
             LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
             ShowDuration = Exercise.DurationMinutes > 0 && Exercise.DurationSeconds > 0 ? true : false;
-            ShowRepetition = Exercise.DurationMinutes > 0 && Exercise.DurationSeconds > 0 ? true : false;
+            ShowRepetition = Exercise.DurationMinutes > 0 && Exercise.DurationSeconds > 0 ? false : true;
 
             if (ShowRepetition)
-                RepetitionsText = $"Do {Exercise.Repetitions} repetitions";
+                RepetitionsText = $"{Exercise.Repetitions} Repetitions";
             if (ShowDuration)
                 DurationText = $"{Exercise.DurationMinutes}:{Exercise.DurationSeconds}";
 

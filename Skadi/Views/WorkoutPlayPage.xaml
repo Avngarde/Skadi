@@ -12,8 +12,8 @@
     </ContentPage.BindingContext>
     
     <VerticalStackLayout>
-        <Label Text="{Binding CurrentExerciseName}" HorizontalOptions="Center" Margin="0,30,0,0" FontAttributes="Bold" FontSize="30" />
-        <Label Text="{Binding LapsText}" HorizontalOptions="Center" Margin="0,10,0,10" FontAttributes="Bold" FontSize="30" />
+        <Label Text="{Binding CurrentExerciseName}" HorizontalOptions="Center" Margin="0,30,0,0" FontAttributes="Bold" FontSize="Title" />
+        <Label Text="{Binding LapsText}" HorizontalOptions="Center" Margin="0,10,0,10" FontAttributes="Bold" FontSize="Large" />
 
         <Grid Margin="0,10,0,0" IsVisible="{Binding ShowNextExercise}">
             <Grid.ColumnDefinitions>
@@ -53,7 +53,12 @@
                     Size="260"              
                     Thickness="40" />
             </Frame>
-            <Button Grid.Column="1" mi:MauiIcon.Value="{mi:Fluent Icon=Pause16}" Margin="10" BackgroundColor="Green" FontSize="30" />
+            <Button Grid.Column="1" mi:MauiIcon.Value="{mi:Fluent Icon=Pause16}" Margin="10" BackgroundColor="{StaticResource Primary}" FontSize="30" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Margin="0,40,0,40" IsVisible="{Binding ShowRepetition}">
+            <Label Text="{Binding RepetitionsText}" FontSize="Title" HorizontalTextAlignment="Center" />
+            <Button Grid.Column="1" Text="Done!" Margin="10,50,10,10" BackgroundColor="{StaticResource Primary}" FontSize="20" />
         </VerticalStackLayout>
 
     </VerticalStackLayout>

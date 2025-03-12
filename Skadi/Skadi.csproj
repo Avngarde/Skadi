@@ -66,6 +66,10 @@
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
     </ItemGroup>
 
+    <PropertyGroup>
+      <MtouchLink>SDKOnly</MtouchLink>
+    </PropertyGroup>
+
     <ItemGroup>
       <MauiXaml Update="Views\MainPage.xaml">
         <SubType>Designer</SubType>
