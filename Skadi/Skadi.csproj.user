@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ActiveDebugProfile>Pixel 6 Pro - API 25 (Android 7.1 — API 25)</ActiveDebugProfile>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
-    <ActiveDebugFramework>net8.0-android</ActiveDebugFramework>
+    <ActiveDebugFramework>net8.0-ios</ActiveDebugFramework>
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
     <DefaultDevice>pixel_6_pro_-_api_25</DefaultDevice>
   </PropertyGroup>

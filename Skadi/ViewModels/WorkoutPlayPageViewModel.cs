@@ -34,7 +34,15 @@ namespace Skadi.ViewModels
         [RelayCommand]
         public async Task RepetitionsDone()
         {
-            
+            if (CurrentLap < Exercise.Laps)
+            {
+                CurrentLap += 1;
+                LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
+            }
+            else 
+            {
+                LoadNextExercise();
+            }
         }
 
         public async Task LoadExercises()
@@ -42,7 +50,7 @@ namespace Skadi.ViewModels
             ExerciseService exerciseService = new();
             Exercises = await exerciseService.GetAllExercises(WorkoutId);
             ExerciseIdx = 0;
-            InitExercise();
+            LoadExercise();
         }
 
         public void LoadExerciseProperties()
@@ -61,7 +69,7 @@ namespace Skadi.ViewModels
                 ShowNextExercise = true;
         }
 
-        public void InitExercise()
+        public void LoadExercise()
         {
             if (Exercises != null)
             {
@@ -77,6 +85,12 @@ namespace Skadi.ViewModels
 
                 LoadExerciseProperties();
             }
+        }
+
+        public void LoadNextExercise()
+        {
+            ExerciseIdx++;
+            LoadExercise();
         }
     }
 }
