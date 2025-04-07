@@ -1,5 +1,9 @@
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+
 using Microsoft.Maui.Layouts;
 using Skadi.Models;
 using Skadi.Services;
@@ -54,7 +58,23 @@ public partial class AddExerciseFormViewModel : ObservableObject
             WorkoutId = WorkoutId
         };
 
-        await service.CreateExercise(newExercise);
+        int success = await service.CreateExercise(newExercise);
+
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        if (success > 0)
+        {
+            WeakReferenceMessenger.Default.Send("RefreshExercises");
+
+            var toast = Toast.Make($"Exercise {ExerciseName} added succesfully", ToastDuration.Long, 12);
+            await toast.Show(cancellationTokenSource.Token);
+
+            await Application.Current.MainPage.Navigation.PopAsync(true);
+        }
+        else
+        {
+            var toast = Toast.Make($"Failed to add exercise", ToastDuration.Long, 12);
+            await toast.Show(cancellationTokenSource.Token);
+        }
     }
     
     private ExerciseType GetExerciseTypeFromIndex()

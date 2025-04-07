@@ -9,6 +9,7 @@ using Skadi.Models;
 using Skadi.Views;
 using Skadi.Services;
 using Skadi.Helpers;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Skadi.ViewModels
 {
@@ -40,6 +41,15 @@ namespace Skadi.ViewModels
             }
 
             Exercises = dtoExercises.ToArray();
+        }
+
+        public WorkoutPageViewModel()
+        {
+            WeakReferenceMessenger.Default.Register<string>(this, async (r, m) =>
+            {
+                if (m == "RefreshExercises")
+                    await LoadExercises();
+            });
         }
 
         private string CreateDurationRepetitionText(Exercise exercise)
