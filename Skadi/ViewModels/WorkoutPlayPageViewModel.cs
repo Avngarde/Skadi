@@ -46,7 +46,7 @@ namespace Skadi.ViewModels
                 {
                     DurationMinutes = Exercise.DurationMinutes;
                     DurationSeconds = Exercise.DurationSeconds;
-                    DurationText = $"{DurationMinutes}:{DurationSeconds}";
+                    DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);
                     StartCounting();
                 }
             }
@@ -94,7 +94,7 @@ namespace Skadi.ViewModels
                             }
                             DurationProgress = TimeHelper.TimeToProgress(DurationMinutes, DurationSeconds, Exercise.DurationMinutes, Exercise.DurationSeconds);
                             DurationSeconds = DurationSeconds - 1;
-                            DurationText = $"{DurationMinutes}:{DurationSeconds}";                           
+                            DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);
                         }
                     });
                 }
@@ -120,7 +120,7 @@ namespace Skadi.ViewModels
             if (ShowRepetition)
                 RepetitionsText = $"{Exercise.Repetitions} Repetitions";
             if (ShowDuration)
-                DurationText = $"{Exercise.DurationMinutes}:{Exercise.DurationSeconds}";
+                DurationText = TimeHelper.TimeToDurationText(Exercise.DurationMinutes, Exercise.DurationSeconds);
 
             if (CurrentLap == Exercise.Laps) 
                 ShowNextExercise = true;

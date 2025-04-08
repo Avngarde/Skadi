@@ -3,6 +3,7 @@ using Skadi;
 using Skadi.Models;
 using Skadi.Helpers;
 using Skadi.Interfaces;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SkadiTests;
 
@@ -106,6 +107,19 @@ public class Tests
         {
             Assert.Pass();
         }
+    }
 
+    [Test]
+    public void TimeToDurationTest()
+    {
+        int minutes = 5;
+        int seconds = 34;
+
+        string durText = TimeHelper.TimeToDurationText(minutes, seconds);
+
+        if (durText == "05:34")
+            Assert.Pass();
+        else
+            Assert.Fail();
     }
 }

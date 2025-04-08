@@ -10,4 +10,21 @@ public class TimeHelper
         int percentInteger = (int)(progressPercent * 100.0);
         return percentInteger;
     }
+
+    public static string TimeToDurationText(int minutes, int seconds)
+    {
+        string minute = minutes.ToString();
+        string second = seconds.ToString();
+
+        if (minutes < 10)
+        {
+            minute = "0" + minutes;
+        }
+        if (seconds < 10)
+        {
+            second = "0" + seconds;
+        }
+
+        return $"{minute}:{second}";
+    }
 }

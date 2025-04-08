@@ -85,13 +85,7 @@ public partial class TimerPageViewModel : ObservableObject
 
     private void SetTimerProgressText()
     {
-        string minuteString = Minute.ToString();
-        string secondString = Second.ToString();
-        if (Minute < 10) minuteString = "0" + minuteString;
-        if (Second < 10) secondString = "0" + secondString;
-
-
-        TimePrint = $"{minuteString}:{secondString}";
+        TimePrint = TimeHelper.TimeToDurationText(Minute, Second);
     }
 
     private void SetProgress()
