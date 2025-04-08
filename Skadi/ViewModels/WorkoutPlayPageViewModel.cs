@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 
 namespace Skadi.ViewModels
 {
@@ -35,7 +37,7 @@ namespace Skadi.ViewModels
         [ObservableProperty] private FluentIcons _playPauseIcon = FluentIcons.Pause16;
 
         [RelayCommand]
-        public void RepetitionsOrDurationDone()
+        public async Task RepetitionsOrDurationDone()
         {
             if (CurrentLap < Exercise.Laps)
             {
@@ -52,7 +54,7 @@ namespace Skadi.ViewModels
             }
             else 
             {
-                LoadNextExercise();
+                await LoadNextExercise();
             }
         }
 
@@ -99,7 +101,7 @@ namespace Skadi.ViewModels
                     });
                 }
             }
-            RepetitionsOrDurationDone();
+            await RepetitionsOrDurationDone();
         }
 
         public async Task LoadExercises()
@@ -107,7 +109,7 @@ namespace Skadi.ViewModels
             ExerciseService exerciseService = new();
             Exercises = await exerciseService.GetAllExercises(WorkoutId);
             ExerciseIdx = 0;
-            LoadExercise();
+            await LoadExercise();
         }
 
         public void LoadExerciseProperties()
@@ -129,8 +131,15 @@ namespace Skadi.ViewModels
                 StartCounting();
         }
 
-        public void LoadExercise()
+        public async Task LoadExercise()
         {
+            if (ExerciseIdx == Exercises.Length)
+            {
+                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                var toast = Toast.Make($"Workout completed!", ToastDuration.Long, 14);
+                await toast.Show(cancellationTokenSource.Token);
+                await Application.Current.MainPage.Navigation.PopAsync(true);
+            }
             if (Exercises != null)
             {
                 Exercise = Exercises[ExerciseIdx];
@@ -147,10 +156,10 @@ namespace Skadi.ViewModels
             }
         }
 
-        public void LoadNextExercise()
+        public async Task LoadNextExercise()
         {
             ExerciseIdx++;
-            LoadExercise();
+            await LoadExercise();
         }
     }
 }
