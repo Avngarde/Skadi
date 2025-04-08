@@ -40,9 +40,15 @@ namespace Skadi.ViewModels
             if (CurrentLap < Exercise.Laps)
             {
                 CurrentLap += 1;
-                DurationMinutes = Exercise.DurationMinutes;
-                DurationSeconds = Exercise.DurationSeconds;
                 LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
+
+                if (ShowDuration)
+                {
+                    DurationMinutes = Exercise.DurationMinutes;
+                    DurationSeconds = Exercise.DurationSeconds;
+                    DurationText = $"{DurationMinutes}:{DurationSeconds}";
+                    StartCounting();
+                }
             }
             else 
             {
@@ -93,8 +99,6 @@ namespace Skadi.ViewModels
                     });
                 }
             }
-
-            DurationPaused = true;
             RepetitionsOrDurationDone();
         }
 
