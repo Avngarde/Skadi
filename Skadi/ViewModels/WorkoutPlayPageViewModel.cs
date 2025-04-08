@@ -40,6 +40,8 @@ namespace Skadi.ViewModels
             if (CurrentLap < Exercise.Laps)
             {
                 CurrentLap += 1;
+                DurationMinutes = Exercise.DurationMinutes;
+                DurationSeconds = Exercise.DurationSeconds;
                 LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
             }
             else 
@@ -108,8 +110,8 @@ namespace Skadi.ViewModels
         {
             CurrentExerciseName = Exercise.ExerciseName;
             LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
-            ShowDuration = Exercise.DurationMinutes > 0 && Exercise.DurationSeconds > 0 ? true : false;
-            ShowRepetition = Exercise.DurationMinutes > 0 && Exercise.DurationSeconds > 0 ? false : true;
+            ShowDuration = Exercise.DurationMinutes > 0 || Exercise.DurationSeconds > 0 ? true : false;
+            ShowRepetition = Exercise.Repetitions > 0 ? true : false;
 
             if (ShowRepetition)
                 RepetitionsText = $"{Exercise.Repetitions} Repetitions";
