@@ -135,6 +135,6 @@ public partial class TimerPageViewModel : ObservableObject
         _setOriginalTime = true;
         IsPaused = true;
         SetTimerProgressText();
-;       await ShowDoneMessage();
+       await ShowDoneMessage();
     }
 }

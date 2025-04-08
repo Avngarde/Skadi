@@ -46,19 +46,19 @@
         <VerticalStackLayout Margin="0,20,0,0" IsVisible="{Binding ShowDuration}">
             <Frame Grid.Row="0" BorderColor="Transparent">
                 <customs:CircularProgressBar
-                    Progress="90"
+                    Progress="{Binding DurationProgress}"
                     ProgressLeftColor="{StaticResource Gray100}" 
                     ProgressColor="{StaticResource Primary}"
                     ProgressText="{Binding DurationText}"
                     Size="260"              
                     Thickness="40" />
             </Frame>
-            <Button Grid.Column="1" mi:MauiIcon.Value="{mi:Fluent Icon=Pause16}" Margin="10" BackgroundColor="{StaticResource Primary}" FontSize="30" />
+            <Button Grid.Column="1" mi:MauiIcon.Value="{mi:Fluent Icon={Binding PlayPauseIcon}}" Margin="10" BackgroundColor="{StaticResource Primary}" FontSize="30" Command="{Binding SetPauseOrPlayCommand}" />
         </VerticalStackLayout>
 
         <VerticalStackLayout Margin="0,40,0,40" IsVisible="{Binding ShowRepetition}">
             <Label Text="{Binding RepetitionsText}" FontSize="Title" HorizontalTextAlignment="Center" />
-            <Button Grid.Column="1" Text="Done!" Margin="10,50,10,10" BackgroundColor="{StaticResource Primary}" FontSize="20" Command="{Binding RepetitionsDoneCommand}" />
+            <Button Grid.Column="1" Text="Done!" Margin="10,50,10,10" BackgroundColor="{StaticResource Primary}" FontSize="20" Command="{Binding RepetitionsOrDurationDoneCommand}" />
         </VerticalStackLayout>
 
     </VerticalStackLayout>
