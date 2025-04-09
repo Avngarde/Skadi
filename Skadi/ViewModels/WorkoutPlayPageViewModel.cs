@@ -49,11 +49,14 @@ namespace Skadi.ViewModels
                     DurationMinutes = Exercise.DurationMinutes;
                     DurationSeconds = Exercise.DurationSeconds;
                     DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);
+                    DurationProgress = 0;
                     StartCounting();
                 }
             }
             else 
             {
+                if (ShowDuration)
+                    await Task.Delay(1000); // Make sure it counts to 0 before moving to next exercise
                 await LoadNextExercise();
             }
         }
@@ -78,29 +81,24 @@ namespace Skadi.ViewModels
         {
             while (DurationMinutes > 0 || DurationSeconds > 0)
             {
+                await Task.Delay(1000);
                 if (DurationPaused)
-                {
                     return;
+
+                if (DurationMinutes > 0 && DurationSeconds == 0)
+                {
+                    DurationMinutes--;
+                    DurationSeconds = 59;
                 }
                 else
                 {
-                    await Task.Delay(1000);
-                    await MainThread.InvokeOnMainThreadAsync(() =>
-                    {
-                        if (!DurationPaused) // Avoid seconds decreasing by 1 after the pause button was clicked
-                        {
-                            if (DurationMinutes > 0 && DurationSeconds == 0)
-                            {
-                                DurationMinutes = DurationMinutes - 1;
-                                DurationSeconds = 59;
-                            }
-                            DurationProgress = TimeHelper.TimeToProgress(DurationMinutes, DurationSeconds, Exercise.DurationMinutes, Exercise.DurationSeconds);
-                            DurationSeconds = DurationSeconds - 1;
-                            DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);
-                        }
-                    });
+                    DurationSeconds--;
                 }
+
+                DurationProgress = TimeHelper.TimeToProgress(DurationMinutes, DurationSeconds, Exercise.DurationMinutes, Exercise.DurationSeconds);
+                DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);
             }
+
             await RepetitionsOrDurationDone();
         }
 
@@ -112,7 +110,7 @@ namespace Skadi.ViewModels
             await LoadExercise();
         }
 
-        public void LoadExerciseProperties()
+        public async Task LoadExerciseProperties()
         {
             CurrentExerciseName = Exercise.ExerciseName;
             LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
@@ -122,13 +120,19 @@ namespace Skadi.ViewModels
             if (ShowRepetition)
                 RepetitionsText = $"{Exercise.Repetitions} Repetitions";
             if (ShowDuration)
+            {
                 DurationText = TimeHelper.TimeToDurationText(Exercise.DurationMinutes, Exercise.DurationSeconds);
+                DurationProgress = 100;
+            }
 
             if (CurrentLap == Exercise.Laps) 
                 ShowNextExercise = true;
 
             if (ShowDuration)
+            {
+                await Task.Delay(1000);
                 StartCounting();
+            }
         }
 
         public async Task LoadExercise()
@@ -147,12 +151,12 @@ namespace Skadi.ViewModels
                 if (ShowDuration)
                 {
                     DurationMinutes = Exercise.DurationMinutes;
-                    DurationSeconds = Exercise.DurationSeconds;
+                    DurationSeconds = Exercise.DurationSeconds + 1; // This ensures that timer will count exactly from set second
                 }
                 else
                     Repetitions = Exercise.Repetitions;
 
-                LoadExerciseProperties();
+                await LoadExerciseProperties();
             }
         }
 
