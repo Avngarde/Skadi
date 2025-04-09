@@ -140,7 +140,7 @@ namespace Skadi.ViewModels
                 await toast.Show(cancellationTokenSource.Token);
                 await Application.Current.MainPage.Navigation.PopAsync(true);
             }
-            if (Exercises != null)
+            else if (Exercises != null)
             {
                 Exercise = Exercises[ExerciseIdx];
                 CurrentLap = 1;
