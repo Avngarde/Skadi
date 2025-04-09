@@ -35,6 +35,7 @@ namespace Skadi.ViewModels
         [ObservableProperty] private bool _durationPaused = false;
         [ObservableProperty] private int _durationProgress = 100;
         [ObservableProperty] private FluentIcons _playPauseIcon = FluentIcons.Pause16;
+        [ObservableProperty] private Color _exerciseColor = Colors.White;
 
         [RelayCommand]
         public async Task RepetitionsOrDurationDone()
@@ -127,6 +128,8 @@ namespace Skadi.ViewModels
 
             if (CurrentLap == Exercise.Laps) 
                 ShowNextExercise = true;
+
+            ExerciseColor = ColoursHelper.GetExerciseTypeColor(Exercise.ExerciseType);
 
             if (ShowDuration)
             {
