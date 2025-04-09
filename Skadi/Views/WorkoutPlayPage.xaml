@@ -50,10 +50,10 @@
                     ProgressLeftColor="{StaticResource Gray100}" 
                     ProgressColor="{StaticResource Primary}"
                     ProgressText="{Binding DurationText}"
-                    Size="260"              
-                    Thickness="40" />
+                    Size="350"              
+                    Thickness="65" />
             </Frame>
-            <Button Grid.Column="1" mi:MauiIcon.Value="{mi:Fluent Icon={Binding PlayPauseIcon}}" Margin="10" BackgroundColor="{StaticResource Primary}" FontSize="30" Command="{Binding SetPauseOrPlayCommand}" />
+            <Button Grid.Column="1" mi:MauiIcon.Value="{mi:Fluent Icon={Binding PlayPauseIcon}}" Margin="10, 20, 10, 10" BackgroundColor="{StaticResource Primary}" FontSize="30" Command="{Binding SetPauseOrPlayCommand}" />
         </VerticalStackLayout>
 
         <VerticalStackLayout Margin="0,40,0,40" IsVisible="{Binding ShowRepetition}">
