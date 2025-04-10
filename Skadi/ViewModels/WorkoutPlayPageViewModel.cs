@@ -50,26 +50,24 @@ namespace Skadi.ViewModels
                     DurationMinutes = Exercise.DurationMinutes;
                     DurationSeconds = Exercise.DurationSeconds;
                     DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);
-                    DurationProgress = 0;
-                    StartCounting();
+                    DurationProgress = 100;
+                    await StartCounting();
                 }
             }
             else 
             {
-                if (ShowDuration)
-                    await Task.Delay(1000); // Make sure it counts to 0 before moving to next exercise
                 await LoadNextExercise();
             }
         }
 
         [RelayCommand]
-        public void SetPauseOrPlay()
+        public async Task SetPauseOrPlay()
         {
             if (DurationPaused)
             {
                 PlayPauseIcon = FluentIcons.Pause16;
                 DurationPaused = false;
-                StartCounting();
+                await StartCounting();
             }
             else
             {
@@ -78,7 +76,7 @@ namespace Skadi.ViewModels
             }
         }
 
-        private async void StartCounting()
+        private async Task StartCounting()
         {
             while (DurationMinutes > 0 || DurationSeconds > 0)
             {
@@ -122,7 +120,7 @@ namespace Skadi.ViewModels
                 RepetitionsText = $"{Exercise.Repetitions} Repetitions";
             if (ShowDuration)
             {
-                DurationText = TimeHelper.TimeToDurationText(Exercise.DurationMinutes, Exercise.DurationSeconds);
+                DurationText = TimeHelper.TimeToDurationText(Exercise.DurationMinutes, Exercise.DurationSeconds - 2);
                 DurationProgress = 100;
             }
 
@@ -133,8 +131,7 @@ namespace Skadi.ViewModels
 
             if (ShowDuration)
             {
-                await Task.Delay(1000);
-                StartCounting();
+                await StartCounting();
             }
         }
 
