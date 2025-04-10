@@ -56,6 +56,8 @@ namespace Skadi.ViewModels
             }
             else 
             {
+                if (ShowDuration)
+                    await Task.Delay(1000);
                 await LoadNextExercise();
             }
         }
@@ -78,24 +80,24 @@ namespace Skadi.ViewModels
 
         private async Task StartCounting()
         {
-            while (DurationMinutes > 0 || DurationSeconds > 0)
+            while (DurationMinutes > 0 || DurationSeconds >= 0)
             {
-                await Task.Delay(1000);
                 if (DurationPaused)
                     return;
+
+                DurationProgress = TimeHelper.TimeToProgress(DurationMinutes, DurationSeconds, Exercise.DurationMinutes, Exercise.DurationSeconds);
+                DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);
 
                 if (DurationMinutes > 0 && DurationSeconds == 0)
                 {
                     DurationMinutes--;
                     DurationSeconds = 59;
                 }
-                else
+                else if (DurationSeconds >= 0)
                 {
                     DurationSeconds--;
                 }
-
-                DurationProgress = TimeHelper.TimeToProgress(DurationMinutes, DurationSeconds, Exercise.DurationMinutes, Exercise.DurationSeconds);
-                DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);
+                await Task.Delay(1000);
             }
 
             await RepetitionsOrDurationDone();
@@ -151,7 +153,7 @@ namespace Skadi.ViewModels
                 if (ShowDuration)
                 {
                     DurationMinutes = Exercise.DurationMinutes;
-                    DurationSeconds = Exercise.DurationSeconds + 1; // This ensures that timer will count exactly from set second
+                    DurationSeconds = Exercise.DurationSeconds; // This ensures that timer will count exactly from set second
                 }
                 else
                     Repetitions = Exercise.Repetitions;
