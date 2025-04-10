@@ -33,7 +33,9 @@ namespace Skadi.ViewModels
         [ObservableProperty] private bool _showDuration = true;
         [ObservableProperty] private bool _showRepetition = false;
         [ObservableProperty] private bool _durationPaused = false;
-        [ObservableProperty] private int _durationProgress = 100;
+
+        // Setting it to 101 triggers CircularProgressBar.AnimateProgress once its set to 100, making the timer progress bar to appear at the same time as the rest of UI
+        [ObservableProperty] private int _durationProgress = 101; 
         [ObservableProperty] private FluentIcons _playPauseIcon = FluentIcons.Pause16;
         [ObservableProperty] private Color _exerciseColor = Colors.White;
 
@@ -114,26 +116,27 @@ namespace Skadi.ViewModels
         public async Task LoadExerciseProperties()
         {
             CurrentExerciseName = Exercise.ExerciseName;
-            LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
+            ExerciseColor = ColoursHelper.GetExerciseTypeColor(Exercise.ExerciseType);
+
             ShowDuration = Exercise.DurationMinutes > 0 || Exercise.DurationSeconds > 0 ? true : false;
             ShowRepetition = Exercise.Repetitions > 0 ? true : false;
 
-            if (ShowRepetition)
-                RepetitionsText = $"{Exercise.Repetitions} Repetitions";
+            CurrentLap = 1;
+            LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
+
             if (ShowDuration)
             {
-                DurationText = TimeHelper.TimeToDurationText(Exercise.DurationMinutes, Exercise.DurationSeconds - 2);
+                DurationMinutes = Exercise.DurationMinutes;
+                DurationSeconds = Exercise.DurationSeconds;
+                DurationText = TimeHelper.TimeToDurationText(Exercise.DurationMinutes, Exercise.DurationSeconds);
                 DurationProgress = 100;
-            }
-
-            if (CurrentLap == Exercise.Laps) 
-                ShowNextExercise = true;
-
-            ExerciseColor = ColoursHelper.GetExerciseTypeColor(Exercise.ExerciseType);
-
-            if (ShowDuration)
-            {
+                await Task.Delay(100);
                 await StartCounting();
+            }
+            else
+            {
+                Repetitions = Exercise.Repetitions;
+                RepetitionsText = $"{Exercise.Repetitions} Repetitions";
             }
         }
 
@@ -149,15 +152,6 @@ namespace Skadi.ViewModels
             else if (Exercises != null)
             {
                 Exercise = Exercises[ExerciseIdx];
-                CurrentLap = 1;
-                if (ShowDuration)
-                {
-                    DurationMinutes = Exercise.DurationMinutes;
-                    DurationSeconds = Exercise.DurationSeconds; // This ensures that timer will count exactly from set second
-                }
-                else
-                    Repetitions = Exercise.Repetitions;
-
                 await LoadExerciseProperties();
             }
         }
