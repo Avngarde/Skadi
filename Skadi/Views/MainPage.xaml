@@ -23,18 +23,20 @@
                                 <TapGestureRecognizer Command="{Binding Path=BindingContext.OpenWorkoutCommand, Source={x:Reference Name=WorkoutsLayout}}" CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80*" />
-                                <ColumnDefinition Width="20*" />
+                                <ColumnDefinition Width="50*" />
+                                <ColumnDefinition Width="15*" />
                             </Grid.ColumnDefinitions>
                             
                             <Grid Grid.Column="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="50*" />
                                     <RowDefinition Height="50*" />
+                                    <RowDefinition Height="50*" />
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Text="{Binding WorkoutName}" />
                                 <Label Grid.Row="1" Text="{Binding RoundsText}" TextColor="SlateGray"/>
+                                <Label Grid.Row="2" Text="{Binding ExerciseCount}" TextColor="SlateGray"/>
                             </Grid>
                             
                             <Border Grid.Column="1" BackgroundColor="{Binding DifficultyColor}" Stroke="{Binding DifficultyColor}" StrokeShape="RoundRectangle 5,5,5,5">

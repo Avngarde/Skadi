@@ -72,6 +72,7 @@ public partial class MainPageViewModel : ObservableObject
         Workout[] workoutsDb = await new WorkoutService().GetAllWorkouts();
         foreach (var wrkout in workoutsDb)
         {
+            Exercise[] exercises = await new ExerciseService().GetAllExercises(wrkout.Id);
             (Color, Color) colors = ColoursHelper.GetWorkoutColours(wrkout.Difficulty);
             workoutsMainPageList.Add(
                 new WorkoutMainPage()
@@ -81,7 +82,8 @@ public partial class MainPageViewModel : ObservableObject
                     DifficultyTextColor = colors.Item2,
                     Id = wrkout.Id,
                     RoundsText = $"Rounds: {wrkout.Rounds}",
-                    WorkoutName = wrkout.WorkoutName
+                    WorkoutName = wrkout.WorkoutName,
+                    ExerciseCount = $"Exercises: {exercises.Count()}"
                 }
             );
         }
@@ -97,5 +99,6 @@ public partial class MainPageViewModel : ObservableObject
         public Difficulty Difficulty { get; set; }
         public Color DifficultyColor { get; set; }
         public Color DifficultyTextColor { get; set; }
+        public string? ExerciseCount { get; set; }
     }
 }
