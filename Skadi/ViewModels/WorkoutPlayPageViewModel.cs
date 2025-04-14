@@ -71,7 +71,7 @@ namespace Skadi.ViewModels
             {
                 PlayPauseIcon = FluentIcons.Pause16;
                 DurationPaused = false;
-                await StartCounting();
+                //await StartCounting();
             }
             else
             {
@@ -85,7 +85,10 @@ namespace Skadi.ViewModels
             while (DurationMinutes > 0 || DurationSeconds >= 0)
             {
                 if (DurationPaused)
-                    return;
+                {
+                    await Task.Delay(1000);
+                    continue;
+                }
 
                 DurationProgress = TimeHelper.TimeToProgress(DurationMinutes, DurationSeconds, Exercise.DurationMinutes, Exercise.DurationSeconds);
                 DurationText = TimeHelper.TimeToDurationText(DurationMinutes, DurationSeconds);

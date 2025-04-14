@@ -16,22 +16,22 @@ namespace Skadi.Helpers
             switch (exerciseType)
             {
                 case ExerciseType.Cardio:
-                    exerciseTextColor = Color.FromArgb("39dbff");
+                    exerciseTextColor = Color.FromArgb("04E824");
                     break;
                 case ExerciseType.Plyometrics:
-                    exerciseTextColor = Color.FromArgb("ff5e5e");
+                    exerciseTextColor = Color.FromArgb("9D96B8");
                     break;
                 case ExerciseType.Technique:
-                    exerciseTextColor = Color.FromArgb("ffb443");
+                    exerciseTextColor = Color.FromArgb("119DA4");
                     break;
                 case ExerciseType.Strength:
-                    exerciseTextColor = Color.FromArgb("cd76ea");
+                    exerciseTextColor = Color.FromArgb("FB3640");
                     break;
                 case ExerciseType.Stretching:
-                    exerciseTextColor = Color.FromArgb("00ff75");
+                    exerciseTextColor = Color.FromArgb("937D64");
                     break;
                 case ExerciseType.Warmup:
-                    exerciseTextColor = Color.FromArgb("ffe600");
+                    exerciseTextColor = Color.FromArgb("96C5F7");
                     break;
             }
 
