@@ -57,7 +57,7 @@
         </VerticalStackLayout>
 
         <VerticalStackLayout Margin="0,40,0,40" IsVisible="{Binding ShowRepetition}">
-            <Label Text="{Binding RepetitionsText}" FontSize="Title" HorizontalTextAlignment="Center" />
+            <Label Text="{Binding RepetitionsText}" Margin="0,100,0,100" FontSize="50" HorizontalTextAlignment="Center" />
             <Button Grid.Column="1" Text="Done!" Margin="10,50,10,10" BackgroundColor="{StaticResource Primary}" FontSize="20" Command="{Binding RepetitionsOrDurationDoneCommand}" />
         </VerticalStackLayout>
 
