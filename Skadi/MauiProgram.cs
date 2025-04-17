@@ -2,6 +2,7 @@
 using CommunityToolkit.Maui;
 using MauiIcons.Core;
 using MauiIcons.Fluent;
+using Plugin.Maui.Audio;
 
 namespace Skadi;
 
@@ -10,6 +11,7 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+        builder.AddAudio();
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()

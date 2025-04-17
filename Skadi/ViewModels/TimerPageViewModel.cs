@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Skadi.Helpers;
+using Skadi.Services;
 using MauiIcons.Fluent;
 
 namespace Skadi.ViewModels;
@@ -21,6 +22,7 @@ public partial class TimerPageViewModel : ObservableObject
     private bool _setOriginalTime = true;
     private int _originalMinute = 0;
     private int _originalSecond = 0;
+    private SoundService soundService = new();
 
     [RelayCommand]
     public async Task FrameTapped()
@@ -122,6 +124,7 @@ public partial class TimerPageViewModel : ObservableObject
         _setOriginalTime = true;
         IsPaused = true;
         SetTimerProgressText();
-       await ShowDoneMessage();
+        soundService.Play();
+        await ShowDoneMessage();
     }
 }

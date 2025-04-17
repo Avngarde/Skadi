@@ -19,6 +19,7 @@ namespace Skadi.ViewModels
         private int DurationMinutes { get; set; }
         private int DurationSeconds { get; set; }
         private int Repetitions { get; set; }
+        private SoundService soundService = new();
 
         [ObservableProperty] public string _repetitionsText = "";
         [ObservableProperty] public string _durationText = "";
@@ -41,6 +42,7 @@ namespace Skadi.ViewModels
             {
                 CurrentLap += 1;
                 LapsText = $"Laps: {CurrentLap}/{Exercise.Laps}";
+                soundService.Play();
 
                 if (ShowDuration)
                 {
@@ -172,6 +174,7 @@ namespace Skadi.ViewModels
         {
             if (ExerciseIdx >= Exercises.Length)
             {
+                soundService.Play();
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
                 var toast = Toast.Make($"Workout completed!", ToastDuration.Long, 14);
                 await toast.Show(cancellationTokenSource.Token);

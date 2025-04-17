@@ -3,6 +3,7 @@ using Skadi;
 using Skadi.Models;
 using Skadi.Helpers;
 using Skadi.Interfaces;
+using Skadi.Services;
 
 namespace SkadiTests;
 
@@ -120,5 +121,12 @@ public class Tests
             Assert.Pass();
         else
             Assert.Fail();
+    }
+
+    [Test]
+    public void LoadBellTest()
+    {
+        SoundService soundService = new();
+        soundService.Play();
     }
 }
