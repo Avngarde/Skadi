@@ -41,7 +41,6 @@ public partial class MainPageViewModel : ObservableObject
                 Id = workout.Id,
                 WorkoutName = workout.WorkoutName,
                 Difficulty = workout.Difficulty,
-                Rounds = Convert.ToInt16(workout.RoundsText.Split(':')[1])
             };
             await viewModel.LoadExercises();
         }
@@ -81,7 +80,6 @@ public partial class MainPageViewModel : ObservableObject
                     DifficultyColor = colors.Item1,
                     DifficultyTextColor = colors.Item2,
                     Id = wrkout.Id,
-                    RoundsText = $"Rounds: {wrkout.Rounds}",
                     WorkoutName = wrkout.WorkoutName,
                     ExerciseCount = $"Exercises: {exercises.Count()}"
                 }
@@ -95,7 +93,6 @@ public partial class MainPageViewModel : ObservableObject
     {
         public int Id { get; set; }
         public string? WorkoutName { get; set; }
-        public string RoundsText { get; set; }
         public Difficulty Difficulty { get; set; }
         public Color DifficultyColor { get; set; }
         public Color DifficultyTextColor { get; set; }

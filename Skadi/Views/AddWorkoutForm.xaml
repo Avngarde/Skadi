@@ -12,7 +12,6 @@
 
     <VerticalStackLayout Padding="0" Spacing="20" Margin="20,50,20,0">
         <Entry Placeholder="Workout name" Text="{Binding WorkoutName}" />
-        <Entry Placeholder="Rounds" Text="{Binding Rounds}" />
         <Picker Title="Difficulty" ItemsSource="{Binding Difficulties}" SelectedIndex="{Binding DifficultyIndex}"/>
         <Button Text="Add workout" Command="{Binding CreateNewWorkoutCommand}" />
     </VerticalStackLayout>

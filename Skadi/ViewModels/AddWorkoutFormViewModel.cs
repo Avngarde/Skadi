@@ -11,9 +11,6 @@ namespace Skadi.ViewModels;
 public partial class AddWorkoutFormViewModel : ObservableObject
 {
     [ObservableProperty] private string _workoutName;
-
-    [ObservableProperty] private int _rounds;
-
     [ObservableProperty] private int _difficultyIndex;
     
     public List<string> Difficulties
@@ -48,7 +45,6 @@ public partial class AddWorkoutFormViewModel : ObservableObject
         Workout workout = new()
         {
             WorkoutName = WorkoutName,
-            Rounds = Rounds,
             Difficulty = difficulty
         };
         
