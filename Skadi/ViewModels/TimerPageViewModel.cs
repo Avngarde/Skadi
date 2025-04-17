@@ -2,14 +2,7 @@
 using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
-using Microsoft.Maui.Controls.PlatformConfiguration;
-
 using Skadi.Helpers;
-using Skadi.Models;
-
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
 using MauiIcons.Fluent;
 
 namespace Skadi.ViewModels;

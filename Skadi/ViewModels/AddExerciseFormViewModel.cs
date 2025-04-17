@@ -3,8 +3,6 @@ using CommunityToolkit.Maui.Core;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-
-using Microsoft.Maui.Layouts;
 using Skadi.Models;
 using Skadi.Services;
 

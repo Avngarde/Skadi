@@ -3,7 +3,6 @@ using Skadi;
 using Skadi.Models;
 using Skadi.Helpers;
 using Skadi.Interfaces;
-using System.Security.Cryptography.X509Certificates;
 
 namespace SkadiTests;
 

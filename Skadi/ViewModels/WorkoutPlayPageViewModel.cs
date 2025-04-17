@@ -4,11 +4,6 @@ using MauiIcons.Fluent;
 using Skadi.Models;
 using Skadi.Services;
 using Skadi.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
 

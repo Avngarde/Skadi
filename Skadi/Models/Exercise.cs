@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using SQLite;
 
 namespace Skadi.Models;
