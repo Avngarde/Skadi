@@ -10,7 +10,12 @@
     <ContentPage.BindingContext>
         <viewModels:WorkoutPlayPageViewModel />
     </ContentPage.BindingContext>
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Skip lap" Command="{Binding SkipLapCommand}" />
+        <ToolbarItem Text="Skip exercise" Command="{Binding SkipExerciseCommand}" />
+    </ContentPage.ToolbarItems>
+
     <VerticalStackLayout>
         <Label Text="{Binding CurrentExerciseName}" HorizontalOptions="Center" Margin="0,30,0,0" FontAttributes="Bold" FontSize="Title" />
         <Label Text="{Binding LapsText}" HorizontalOptions="Center" Margin="0,10,0,10" FontAttributes="Bold" FontSize="Large" />

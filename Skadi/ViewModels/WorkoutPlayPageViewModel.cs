@@ -80,6 +80,36 @@ namespace Skadi.ViewModels
             }
         }
 
+        [RelayCommand]
+        public async void SkipExercise()
+        {
+            if (ShowDuration)
+            {
+                CurrentLap = Exercise.Laps;
+                ResetTimer();
+            }
+            else await LoadNextExercise();
+        }
+
+        [RelayCommand]
+        public async void SkipLap()
+        {
+            if (ShowDuration)
+                ResetTimer();
+            else
+                await RepetitionsOrDurationDone();
+            
+        }
+
+        private void ResetTimer()
+        {
+            if (ShowDuration)
+            {
+                DurationSeconds = -1;
+                DurationMinutes = 0;
+            }
+        }
+
         private async Task StartCounting()
         {
             while (DurationMinutes > 0 || DurationSeconds >= 0)
@@ -145,7 +175,7 @@ namespace Skadi.ViewModels
 
         public async Task LoadExercise()
         {
-            if (ExerciseIdx == Exercises.Length)
+            if (ExerciseIdx >= Exercises.Length)
             {
                 CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
                 var toast = Toast.Make($"Workout completed!", ToastDuration.Long, 14);
