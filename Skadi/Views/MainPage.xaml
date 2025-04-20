@@ -17,35 +17,53 @@
         <StackLayout x:Name="WorkoutsLayout" BindableLayout.ItemsSource="{Binding Workouts}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <Frame Margin="15" Padding="15">
-                        <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Path=BindingContext.OpenWorkoutCommand, Source={x:Reference Name=WorkoutsLayout}}" CommandParameter="{Binding .}" />
-                            </Grid.GestureRecognizers>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50*" />
-                                <ColumnDefinition Width="15*" />
-                            </Grid.ColumnDefinitions>
-                            
-                            <Grid Grid.Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50*" />
-                                    <RowDefinition Height="50*" />
-                                    <RowDefinition Height="50*" />
-                                </Grid.RowDefinitions>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                        BackgroundColor="LightCoral"
+                                        Command="{Binding Path=BindingContext.DeleteWorkoutCommand, Source={x:Reference Name=WorkoutsLayout}}"
+                                        CommandParameter="{Binding .}" 
+                                        IsDestructive="True"/>
+                                <SwipeItem Text="Edit"
+                                        BackgroundColor="LightBlue"
+                                        Command="{Binding Path=BindingContext.EditWorkoutCommand, Source={x:Reference Name=WorkoutsLayout}}"
+                                        CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
 
-                                <Label Grid.Row="0" Text="{Binding WorkoutName}" />
-                                <Label Grid.Row="2" Text="{Binding ExerciseCount}" TextColor="SlateGray"/>
+                        <Frame Margin="15" Padding="15">
+                            <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.OpenWorkoutCommand, Source={x:Reference Name=WorkoutsLayout}}" CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="15*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50*" />
+                                        <RowDefinition Height="50*" />
+                                        <RowDefinition Height="50*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Text="{Binding WorkoutName}" />
+                                    <Label Grid.Row="2" Text="{Binding ExerciseCount}" TextColor="SlateGray"/>
+                                </Grid>
+
+                                <Border Grid.Column="1" BackgroundColor="{Binding DifficultyColor}" Stroke="{Binding DifficultyColor}" StrokeShape="RoundRectangle 5,5,5,5">
+                                    <Label Text="{Binding Difficulty}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{Binding DifficultyTextColor}" />
+                                </Border>
                             </Grid>
-                            
-                            <Border Grid.Column="1" BackgroundColor="{Binding DifficultyColor}" Stroke="{Binding DifficultyColor}" StrokeShape="RoundRectangle 5,5,5,5">
-                                <Label Text="{Binding Difficulty}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{Binding DifficultyTextColor}" />
-                            </Border>
-                        </Grid>
-                    </Frame>
+                        </Frame>
+                    </SwipeView>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </StackLayout>
     </ScrollView>
+
+
 
 </ContentPage>

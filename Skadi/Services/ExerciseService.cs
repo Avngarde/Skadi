@@ -43,6 +43,18 @@ namespace Skadi.Services
             return await con.DeleteAsync(exercise);
         }
 
+        public async Task<int> DeleteExercises(Exercise[] exercises)
+        {
+            int success = 0;
+            await InitTableIfDoesNotExist();
+            foreach(Exercise exercise in exercises)
+            {
+                success = await con.DeleteAsync(exercise);
+            }
+
+            return success;
+        }
+
         public async Task<bool> ExerciseAlreadyExist(Exercise exercise)
         {
             await InitTableIfDoesNotExist();

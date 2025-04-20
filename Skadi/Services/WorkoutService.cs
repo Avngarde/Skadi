@@ -56,4 +56,10 @@ public class WorkoutService
         await InitTableIfDoesNotExist();
         return await con.Table<Workout>().ToArrayAsync();
     }
+
+    public async Task<Workout> GetWorkout(int id)
+    {
+        await InitTableIfDoesNotExist();
+        return await con.Table<Workout>().Where(wrkout => wrkout.Id == id).FirstAsync();
+    }
 }

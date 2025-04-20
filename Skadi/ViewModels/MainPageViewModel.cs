@@ -48,6 +48,22 @@ public partial class MainPageViewModel : ObservableObject
     }
 
     [RelayCommand]
+    public async Task DeleteWorkout(WorkoutMainPage workoutElement)
+    {
+        bool delete = await Application.Current.MainPage.DisplayAlert("Delete", $"Are you sure you want to delete {workoutElement.WorkoutName}", "Yes", "No");
+        if (delete)
+        {
+            WorkoutService workoutService = new();
+            ExerciseService exerService = new();
+            Workout workout = await workoutService.GetWorkout(workoutElement.Id);
+            Exercise[] exercises = await exerService.GetAllExercises(workout.Id);
+            await exerService.DeleteExercises(exercises);
+            await workoutService.DeleteWorkout(workout);
+            await LoadWorkoutsAsync();
+        }
+    }
+
+    [RelayCommand]
     public async Task WorkoutTap(WorkoutMainPage tappedWorkout)
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
