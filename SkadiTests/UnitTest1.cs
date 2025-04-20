@@ -32,7 +32,6 @@ public class Tests
         Skadi.Models.Workout workout = new()
         {
             Difficulty = Difficulty.Easy,
-            Rounds = 1,
             WorkoutName = "TestWorkout"
         };
 
@@ -124,9 +123,33 @@ public class Tests
     }
 
     [Test]
-    public void LoadBellTest()
+    public async Task DeleteExercisesTest()
     {
-        SoundService soundService = new();
-        soundService.Play();
+        string tempDirectory = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+        Directory.CreateDirectory(tempDirectory);
+
+        var mockFileSystemHelper = new Mock<IFileSystemHelper>();
+        mockFileSystemHelper.Setup(f => f.AppDataDirectory).Returns(tempDirectory);
+        DbConfig dbConfig = new(mockFileSystemHelper.Object);
+        ExerciseService exerciseService = new(dbConfig);
+
+        Exercise exercise = new()
+        {
+            ExerciseName = "ExerciseTest",
+            Repetitions = 1,
+            DurationMinutes = 1,
+            DurationSeconds = 1,
+            Laps = 1,
+            WorkoutId = -1,
+            ExerciseType = ExerciseType.Cardio
+        };
+
+        int addedRows = await exerciseService.CreateExercise(exercise);
+        int deletedRows = await exerciseService.DeleteExercise(exercise);
+
+        if (addedRows > 0 && deletedRows > 0)
+            Assert.Pass();
+        else
+            Assert.Fail();
     }
 }
