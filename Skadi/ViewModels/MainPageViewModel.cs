@@ -64,6 +64,19 @@ public partial class MainPageViewModel : ObservableObject
     }
 
     [RelayCommand]
+    public async Task EditWorkout(WorkoutMainPage workoutElem)
+    {
+        WorkoutService workoutService = new();
+        Workout workout = await workoutService.GetWorkout(workoutElem.Id);
+        EditWorkoutForm editWorkoutForm = new();
+        if (editWorkoutForm.BindingContext is EditWorkoutFormViewModel viewModel)
+        {
+            viewModel.LoadData(workout);
+        }
+        await Application.Current.MainPage.Navigation.PushAsync(editWorkoutForm);
+    }
+
+    [RelayCommand]
     public async Task WorkoutTap(WorkoutMainPage tappedWorkout)
     {
         CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();

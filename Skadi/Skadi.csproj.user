@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ActiveDebugProfile>Windows Machine</ActiveDebugProfile>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
-    <ActiveDebugFramework>net8.0-ios</ActiveDebugFramework>
+    <ActiveDebugFramework>net8.0-android</ActiveDebugFramework>
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
     <DefaultDevice>pixel_5_-_api_34</DefaultDevice>
   </PropertyGroup>

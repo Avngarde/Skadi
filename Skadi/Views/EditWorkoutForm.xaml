@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Skadi.ViewModels"
+             x:Class="Skadi.Views.EditWorkoutForm"
+             Title="Edit">
+
+    <ContentPage.BindingContext>
+        <viewModels:EditWorkoutFormViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="0" Spacing="20" Margin="20,50,20,0">
+        <Entry Placeholder="Workout name" Text="{Binding WorkoutName}" />
+        <Picker Title="Difficulty" ItemsSource="{Binding Difficulties}" SelectedIndex="{Binding DifficultyIndex}"/>
+        <Button Text="Edit workout" Command="{Binding EditWorkoutCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
