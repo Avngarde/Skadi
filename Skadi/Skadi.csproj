@@ -75,6 +75,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <MauiXaml Update="Views\EditExerciseForm.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Views\MainPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>

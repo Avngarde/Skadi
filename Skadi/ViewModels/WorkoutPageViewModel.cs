@@ -26,6 +26,7 @@ namespace Skadi.ViewModels
                 dtoExercises.Add(
                     new ExerciseLayoutDto()
                     {
+                        Id = exercise.Id,
                         ExerciseName = exercise.ExerciseName,
                         DurationRepetitionText = CreateDurationRepetitionText(exercise),
                         ExerciseType = exercise.ExerciseType,
@@ -80,11 +81,30 @@ namespace Skadi.ViewModels
                 await viewModel.LoadExercises();
             }
         }
+
+        [RelayCommand]
+        public async Task EditExercise(ExerciseLayoutDto exerciseElem)
+        {
+            ExerciseService exerciseService = new();
+            Exercise exercise = await exerciseService.GetExercise(exerciseElem.Id);
+            EditExerciseForm editExerciseForm = new();
+            if (editExerciseForm.BindingContext is EditExerciseFormViewModel viewModel)
+            {
+                viewModel.LoadExercise(exercise);
+            }
+            await Application.Current.MainPage.Navigation.PushAsync(editExerciseForm);
+        }
+
+        public async Task DeleteExercise()
+        {
+
+        }
     }
  
 
     public class ExerciseLayoutDto
     {
+        public int Id { get; set; }
         public string ExerciseName { get; set; }
         public string DurationRepetitionText { get; set; }
         public ExerciseType ExerciseType { get; set; }

@@ -19,28 +19,44 @@
         <StackLayout x:Name="WorkoutsLayout" BindableLayout.ItemsSource="{Binding Exercises}">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="10" Padding="10" StrokeShape="RoundRectangle 5,5,5,5" Stroke="{Binding TextColor}">
-                        <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80*" />
-                                <ColumnDefinition Width="35*" />
-                            </Grid.ColumnDefinitions>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                        BackgroundColor="LightCoral"
+                                        Command="{Binding Path=BindingContext.DeleteExerciseCommand, Source={x:Reference Name=WorkoutsLayout}}"
+                                        CommandParameter="{Binding .}" 
+                                        IsDestructive="True"/>
+                                <SwipeItem Text="Edit"
+                                        BackgroundColor="LightBlue"
+                                        Command="{Binding Path=BindingContext.EditExerciseCommand, Source={x:Reference Name=WorkoutsLayout}}"
+                                        CommandParameter="{Binding .}" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
 
-                            <Grid Grid.Column="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50*" />
-                                    <RowDefinition Height="50*" />
-                                    <RowDefinition Height="50*" />
-                                </Grid.RowDefinitions>
+                        <Border Margin="10" Padding="10" StrokeShape="RoundRectangle 5,5,5,5" Stroke="{Binding TextColor}">
+                            <Grid Background="Transparent" IsVisible="True" InputTransparent="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80*" />
+                                    <ColumnDefinition Width="35*" />
+                                </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Text="{Binding ExerciseName}" />
-                                <Label Grid.Row="1" Text="{Binding DurationRepetitionText}" TextColor="SlateGray"/>
-                                <Label Grid.Row="2" Text="{Binding Laps}" TextColor="SlateGray"/>
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50*" />
+                                        <RowDefinition Height="50*" />
+                                        <RowDefinition Height="50*" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Text="{Binding ExerciseName}" />
+                                    <Label Grid.Row="1" Text="{Binding DurationRepetitionText}" TextColor="SlateGray"/>
+                                    <Label Grid.Row="2" Text="{Binding Laps}" TextColor="SlateGray"/>
+                                </Grid>
+
+                                <Label Grid.Column="1" FontSize="Subtitle"  FontAttributes="Bold" Text="{Binding ExerciseType}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{Binding TextColor}" />
                             </Grid>
-
-                            <Label Grid.Column="1" FontSize="Subtitle"  FontAttributes="Bold" Text="{Binding ExerciseType}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{Binding TextColor}" />
-                        </Grid>
-                    </Border>
+                        </Border>
+                    </SwipeView>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </StackLayout>

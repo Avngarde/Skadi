@@ -68,5 +68,11 @@ namespace Skadi.Services
             await InitTableIfDoesNotExist();
             return await con.Table<Exercise>().Where(ex => ex.WorkoutId == workoutId).ToArrayAsync();
         }
+
+        public async Task<Exercise> GetExercise(int exerciseId)
+        {
+            await InitTableIfDoesNotExist();
+            return await con.Table<Exercise>().Where(ex => ex.Id == exerciseId).FirstOrDefaultAsync();
+        }
     }
 }

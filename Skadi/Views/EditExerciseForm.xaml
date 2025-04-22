@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Skadi.ViewModels"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Skadi.Views.EditExerciseForm"
+             Title="EditExerciseForm">
+    
+    <ContentPage.BindingContext>
+        <viewModels:EditExerciseFormViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="0" Spacing="20" Margin="20,50,20,0">
+        <Entry Placeholder="Exercise name" Text="{Binding ExerciseName}" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="10*" />
+            </Grid.ColumnDefinitions>
+
+            <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center">Repetitions</Label>
+            <Switch Grid.Column="1" HorizontalOptions="Start" Toggled="Switch_OnToggled" />
+            <Label Grid.Column="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center">Duration</Label>
+        </Grid>
+
+        <Grid IsVisible="{Binding DurationVisible}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+
+            <Entry Placeholder="Mintues" IsVisible="True" Text="{Binding MinutesDuration}" />
+            <Label Grid.Column="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">-</Label>
+            <Entry Grid.Column="2" Placeholder="Seconds" IsVisible="True" Text="{Binding SecondsDuration}" />
+        </Grid>
+
+        <Entry Placeholder="Repetitions" IsVisible="{Binding RepetitionsVisible}" Text="{Binding Repetitions}" />
+        <Entry Placeholder="Laps" Text="{Binding Laps}" />
+        <Picker Title="Exercise Type" ItemsSource="{Binding ExerciseTypes}" SelectedIndex="{Binding ExerciseTypeIndex}" />
+        <Button Text="Edit Exercise" Command="{Binding EditExerciseCommand}" />
+    </VerticalStackLayout>
+</ContentPage>
