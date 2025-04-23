@@ -95,9 +95,21 @@ namespace Skadi.ViewModels
             await Application.Current.MainPage.Navigation.PushAsync(editExerciseForm);
         }
 
-        public async Task DeleteExercise()
+        [RelayCommand]
+        public async Task DeleteExercise(ExerciseLayoutDto exerciseElem)
         {
-
+            bool delete = await Application.Current.MainPage.DisplayAlert("Delete", $"Are you sure you want to delete {exerciseElem.ExerciseName}", "Yes", "No");
+            if (delete)
+            {
+                ExerciseService exerciseService = new();
+                Exercise exercise = await exerciseService.GetExercise(exerciseElem.Id);
+                int deletedRows = await exerciseService.DeleteExercise(exercise);
+                if (deletedRows > 0)
+                {
+                    await LoadExercises();
+                    WeakReferenceMessenger.Default.Send("RefreshWorkouts"); // Refresh exercise count at workouts
+                }
+            }
         }
     }
  
