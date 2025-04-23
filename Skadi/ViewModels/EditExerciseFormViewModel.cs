@@ -22,6 +22,7 @@ namespace Skadi.ViewModels
         [ObservableProperty] private int _minutesDuration = 0;
         [ObservableProperty] private int _secondsDuration = 0;
         [ObservableProperty] private int _exerciseTypeIndex = 0;
+        [ObservableProperty] private bool _isToggled = false;
         [ObservableProperty] private int _laps = 0;
         [ObservableProperty] private int _id = 0;
 
@@ -56,10 +57,11 @@ namespace Skadi.ViewModels
                 Id = Id,
                 ExerciseName = ExerciseName,
                 ExerciseType = GetExerciseTypeFromIndex(),
-                Repetitions = Repetitions,
+                Repetitions = RepetitionsVisible ? Repetitions : 0,
                 Laps = Laps,
-                DurationMinutes = MinutesDuration,
-                DurationSeconds = SecondsDuration,
+                DurationMinutes = DurationVisible ? MinutesDuration : 0,
+                DurationSeconds = DurationVisible ? SecondsDuration : 0,
+                WorkoutId = WorkoutId,
             };
             int changedRows = await exerciseService.UpdateExercise(exercise);
             if (changedRows > 0)
@@ -75,12 +77,14 @@ namespace Skadi.ViewModels
             ExerciseName = exercise.ExerciseName;
             Laps = exercise.Laps;
             ExerciseTypeIndex = GetExerciseTypeIndex(exercise.ExerciseType);
+            WorkoutId = exercise.WorkoutId;
 
             if (exercise.DurationMinutes > 0 || exercise.DurationSeconds > 0)
             {
                 DurationVisible = true;
                 MinutesDuration = exercise.DurationMinutes;
                 SecondsDuration = exercise.DurationSeconds;
+                IsToggled = true;
             }
             else
             {

@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <Label HorizontalTextAlignment="Start" VerticalTextAlignment="Center">Repetitions</Label>
-            <Switch Grid.Column="1" HorizontalOptions="Start" Toggled="Switch_OnToggled" />
+            <Switch Grid.Column="1" HorizontalOptions="Start" Toggled="Switch_OnToggled" IsToggled="{Binding IsToggled}" />
             <Label Grid.Column="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center">Duration</Label>
         </Grid>
 
